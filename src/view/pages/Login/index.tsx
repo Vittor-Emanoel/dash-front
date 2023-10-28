@@ -4,8 +4,13 @@ import { z } from 'zod';
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
 
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
+import toast from 'react-hot-toast';
+import { useMutation } from 'react-query';
+import { useAuth } from '../../../app/hooks/useAuth';
+import { authService } from '../../../app/services/authService';
+import { SigninParams } from '../../../app/services/authService/signin';
 import img from '../../../assets/images/login.jpg';
 
 const schema = z.object({
@@ -29,10 +34,23 @@ export function Login() {
   } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
+  const { signin: signIn } = useAuth();
 
-  const handleSubmit: SubmitHandler<FormData> = (data) => {
-    console.log(data);
-  };
+  const { mutateAsync, isLoading } = useMutation({
+    mutationFn: async (data: SigninParams) => {
+      return authService.signin(data);
+    },
+  });
+
+  const handleSubmit = hookFormSubmit(async (data) => {
+    try {
+      const { accessToken } = await mutateAsync(data);
+
+      signIn(accessToken);
+    } catch {
+      toast.error('Credenciais inválidas!');
+    }
+  });
 
   return (
     <div className="w-full h-screen flex justify-between">
@@ -45,7 +63,7 @@ export function Login() {
         </p>
 
         <form
-          onSubmit={hookFormSubmit(handleSubmit)}
+          onSubmit={handleSubmit}
           action=""
           className="mt-[60px] w-[361px]  flex flex-col gap-4 "
         >
@@ -60,7 +78,11 @@ export function Login() {
             error={errors.password?.message}
           />
 
-          <Button type="submit" className="mt-2 bg-indigo-900 ">
+          <Button
+            type="submit"
+            className="mt-2 bg-indigo-900 "
+            isLoading={isLoading}
+          >
             Entrar
           </Button>
         </form>

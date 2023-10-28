@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Login } from '../view/pages/Login';
+import { Dashboard } from '../view/pages/dashboard';
 import { AuthGuard } from './authGuard';
 
 export function Router() {
@@ -13,7 +14,7 @@ export function Router() {
 
       <Routes>
         <Route element={<AuthGuard isPrivate={true} />}>
-          <Route path="/dashboard" element={<h1> Dash</h1>} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Route>
       </Routes>
     </BrowserRouter>
