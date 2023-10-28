@@ -12,7 +12,7 @@ export function Router() {
       </Routes>
 
       <Routes>
-        <Route element={<AuthGuard isPrivate={false} />}>
+        <Route element={<AuthGuard isPrivate={true} />}>
           <Route path="/dashboard" element={<h1> Dash</h1>} />
         </Route>
       </Routes>

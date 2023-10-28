@@ -8,7 +8,7 @@ export function AuthGuard({ isPrivate }: IAuthGuardProps) {
   const signedIn = false;
 
   if (!signedIn && isPrivate) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/" />;
   }
 
   if (signedIn && !isPrivate) {
