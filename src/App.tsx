@@ -1,36 +1,36 @@
-import { useState } from 'react';
-import viteLogo from '../../../../../../../vite.svg';
+import { Button } from './components/Button';
+import { Input } from './components/Input';
 
-import './App.css';
-import reactLogo from './assets/react.svg';
+import imageLogin from './assets/images/login.jpg';
 
-function App() {
-  const [count, setCount] = useState(0);
-
+export function App() {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
+    <div className="w-full h-screen flex justify-between">
+      <div className="w-full  flex-1 flex items-center text-right justify-center flex-col">
+        <h1 className="text-gray-900 text-2xl font-bold tracking-[-1px]">
+          Bem vindo!
+        </h1>
+        <p className="space-x-2 text-gray-700 tracking-[-0.5px] text-base leading-6">
+          A plataforma da ADMSA
         </p>
+
+        <form action="" className="mt-[60px] w-[361px]  flex flex-col gap-4 ">
+          <Input name="email" placeholder="Email" />
+          <Input name="password" placeholder="Senha" />
+
+          <Button type="submit" className="mt-2 bg-indigo-900 ">
+            Entrar
+          </Button>
+        </form>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+
+      <div className="w-1/2 bg-indigo-900 ">
+        <img
+          className="w-full h-screen  object-cover"
+          src={imageLogin}
+          alt="foto de uma mulher com um lindo vestido azul e uma rapaz com um lindo terno cinza"
+        />
+      </div>
+    </div>
   );
 }
-
-export default App;
