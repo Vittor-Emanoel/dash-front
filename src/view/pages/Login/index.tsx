@@ -53,19 +53,19 @@ export function Login() {
   });
 
   return (
-    <div className="w-full h-screen flex justify-between">
-      <div className="w-full bg-slate flex-1 flex items-center text-right justify-center flex-col">
+    <div className="w-full h-screen flex justify-between max-sm:justify-center">
+      <div className="p-4 bg-slate w-1/2  flex items-center text-right justify-center flex-col ">
         <h1 className="text-gray-900 text-2xl font-bold tracking-[-1px]">
           Bem vindo!
         </h1>
-        <p className="space-x-2 text-gray-700 tracking-[-0.5px] text-base leading-6">
+        <p className=" text-gray-700 tracking-[-0.5px] text-base leading-6">
           A plataforma da ADMSA
         </p>
 
         <form
           onSubmit={handleSubmit}
           action=""
-          className="mt-[60px] w-[361px]  flex flex-col gap-4 "
+          className="mt-[60px] w-[350px] flex flex-col gap-4 "
         >
           <Input
             placeholder="Email"
@@ -78,17 +78,13 @@ export function Login() {
             error={errors.password?.message}
           />
 
-          <Button
-            type="submit"
-            className="mt-2 bg-indigo-900 "
-            isLoading={isLoading}
-          >
+          <Button type="submit" className="mt-2" isLoading={isLoading}>
             Entrar
           </Button>
         </form>
       </div>
 
-      <div className="w-1/2 bg-indigo-900 ">
+      <div className="w-1/2 bg-indigo-900 max-sm:hidden">
         <img
           className="w-full h-screen  object-cover"
           src={img}

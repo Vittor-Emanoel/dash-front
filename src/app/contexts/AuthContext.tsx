@@ -32,7 +32,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setSignedIn(false);
   }, []);
   return (
-    <AuthContext.Provider value={{ signedIn, signin, signout }}>
+    <AuthContext.Provider value={{ signedIn: true, signin, signout }}>
       {children}
     </AuthContext.Provider>
   );
