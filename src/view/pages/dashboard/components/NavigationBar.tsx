@@ -26,7 +26,7 @@ export function NavigationBar() {
   return (
     <div
       className={cn(
-        'pt-12 relative flex flex-col text-white w-48 h-screen bg-indigo-900',
+        'max-md:hidden pt-12 relative flex flex-col text-white w-48 h-screen bg-indigo-900',
         isExpended ? 'w-[192px] ' : 'w-[90px] px-4',
       )}
     >
