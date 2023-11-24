@@ -1,5 +1,6 @@
 import { LogOut, MenuIcon } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { NAV_ITENS } from '../../utils/NavLinks';
 import { Button } from './button';
 import {
@@ -11,9 +12,17 @@ import {
 } from './sheet';
 
 export function MainNavMobile() {
+  const navigate = useNavigate();
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+
+  const handleItemClick = (href: string) => {
+    navigate(`${href}`);
+    setIsSheetOpen(false);
+  };
+
   return (
-    <Sheet>
-      <SheetTrigger>
+    <Sheet open={isSheetOpen}>
+      <SheetTrigger asChild onClick={() => setIsSheetOpen(!isSheetOpen)}>
         <Button size="icon" variant="outline">
           <MenuIcon />
         </Button>
@@ -27,10 +36,12 @@ export function MainNavMobile() {
         <div className="flex flex-col space-y-5 mt-10">
           {NAV_ITENS.map(({ href, label }) => (
             <Button
+              key={label}
               variant="outline"
               className="justify-start rounded py-2 px-6 border"
+              onClick={() => handleItemClick(href)}
             >
-              <Link to={href}>{label}</Link>
+              {label}
             </Button>
           ))}
         </div>

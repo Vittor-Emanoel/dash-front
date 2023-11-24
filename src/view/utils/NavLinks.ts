@@ -1,14 +1,14 @@
 export const NAV_ITENS = [
   {
     label: 'Home',
-    href: '/',
+    href: '/dashboard',
   },
   {
     label: 'Secretaria',
     href: '/secretary',
   },
   {
-    label: 'FInanceiro',
+    label: 'Financeiro',
     href: '/finance',
   },
 ];
