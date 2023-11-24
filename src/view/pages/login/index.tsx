@@ -1,9 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
-import { Button } from '../../components/Button';
-import { Input } from '../../components/Input';
-
 import { useForm } from 'react-hook-form';
 
 import toast from 'react-hot-toast';
@@ -12,6 +9,8 @@ import { useAuth } from '../../../app/hooks/useAuth';
 import { authService } from '../../../app/services/authService';
 import { SigninParams } from '../../../app/services/authService/signin';
 import img from '../../../assets/images/login.jpg';
+import { Button } from '../../components/ui/button';
+import { Input } from '../../components/ui/input';
 
 const schema = z.object({
   email: z
@@ -70,15 +69,15 @@ export function Login() {
           <Input
             placeholder="Email"
             {...register('email')}
-            error={errors.email?.message}
+            // error={errors.email?.message}
           />
           <Input
             placeholder="Senha"
             {...register('password')}
-            error={errors.password?.message}
+            // error={errors.password?.message}
           />
 
-          <Button type="submit" className="mt-2" isLoading={isLoading}>
+          <Button type="submit" className="mt-2">
             Entrar
           </Button>
         </form>

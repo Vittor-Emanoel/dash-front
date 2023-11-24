@@ -1,4 +1,4 @@
-import { cn } from '../../app/utils/cn';
+import { cn } from './lib/lib';
 
 interface SpinnerProps {
   className?: string;

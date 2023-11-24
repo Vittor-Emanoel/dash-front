@@ -1,5 +1,6 @@
 import { createContext, useCallback, useState } from 'react';
 
+import { LaunchScreen } from '../../view/components/LaunchScreen';
 import { localStorageKeys } from '../config/localStorageKeys';
 
 interface IAuthContextValue {
@@ -34,6 +35,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   return (
     <AuthContext.Provider value={{ signedIn: true, signin, signout }}>
       {children}
+      <LaunchScreen isLoading={false} />
     </AuthContext.Provider>
   );
 }

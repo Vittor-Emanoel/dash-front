@@ -1,19 +1,46 @@
+import { Moon, Sun } from 'lucide-react';
 import { Outlet } from 'react-router-dom';
-import { useAuth } from '../../app/hooks/useAuth';
-import { Header } from '../components/Header';
-import { NavigationBar } from '../pages/dashboard/components/NavigationBar';
+import { useMediaQuery } from 'usehooks-ts';
+import { useTheme } from '../../app/contexts/ThemeProvider';
+import { MainNav } from '../components/ui/main-nav';
+import { MainNavMobile } from '../components/ui/main-nav-mobile';
+import { Search } from '../components/ui/search';
+import { UserNav } from '../components/ui/user-nav';
 
 export function DashboardLayout() {
-  const { signout } = useAuth();
+  const { theme, setTheme } = useTheme();
+
+  const isMobile = useMediaQuery('(max-width: 425px)');
+  const isDesktop = useMediaQuery('(min-width: 768px )');
+
   return (
-    <div className="w-full flex h-screen">
-      {/* navigationBar */}
-      <NavigationBar />
-      {/* contennt */}
-      <main className="flex flex-col grow">
-        <Header />
+    <>
+      <div className="w-full flex h-16 items-center px-4 border-b">
+        {isMobile && <MainNavMobile />}
+        {isDesktop && <MainNav />}
+
+        <div className="ml-auto flex items-center space-x-4">
+          {isDesktop && <Search />}
+
+          <div className="border  p-2 rounded cursor-pointer">
+            {theme === 'light' && (
+              <div onClick={() => setTheme('dark')}>
+                <Moon size={15} />
+              </div>
+            )}
+            {theme === 'dark' && (
+              <div onClick={() => setTheme('light')}>
+                <Sun size={15} />
+              </div>
+            )}
+          </div>
+          <UserNav />
+        </div>
+      </div>
+
+      <div>
         <Outlet />
-      </main>
-    </div>
+      </div>
+    </>
   );
 }
