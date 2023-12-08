@@ -5,7 +5,7 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
-} from '../../components/ui/card';
+} from '../../../components/ui/card';
 
 export function Secretary() {
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ export function Secretary() {
               </p>
             </CardContent>
           </Card>
-          <Card>
+          <Card onClick={() => navigate('/calls')}>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Chamada</CardTitle>
               <PhoneCall size={20} className="text-zinc-300" />
@@ -45,7 +45,7 @@ export function Secretary() {
               </p>
             </CardContent>
           </Card>
-          <Card>
+          <Card onClick={() => navigate('/requirements')}>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
                 Requerimentos

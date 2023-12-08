@@ -5,13 +5,13 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
+  Separator,
 } from '@radix-ui/react-select';
 import { useState } from 'react';
-import { Modal } from '../../components/Modal';
-import { Button } from '../../components/ui/button';
-import { DataTable } from '../../components/ui/dataTable';
-import { Input } from '../../components/ui/input';
-import { Separator } from '../../components/ui/separator';
+import { Modal } from '../../../components/Modal';
+import { Button } from '../../../components/ui/button';
+import { DataTable } from '../../../components/ui/dataTable';
+import { Input } from '../../../components/ui/input';
 
 const CHURCH_MOCK = [
   {
