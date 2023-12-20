@@ -3,6 +3,7 @@ import { DashboardLayout } from '../view/layouts/DashboardLayout';
 import { Dashboard } from '../view/pages/dashboard';
 import { Login } from '../view/pages/login';
 
+import { ForgotPassword } from '../view/pages/forgot-password';
 import { Calls } from '../view/pages/secretary/calls';
 import { Secretary } from '../view/pages/secretary/home';
 import { Members } from '../view/pages/secretary/members';
@@ -15,6 +16,7 @@ export function Router() {
       <Routes>
         <Route element={<AuthGuard isPrivate={false} />}>
           <Route path="/" element={<Login />} />
+          <Route path="/forget-password" element={<ForgotPassword />} />
         </Route>
       </Routes>
 
@@ -22,6 +24,7 @@ export function Router() {
         <Route element={<AuthGuard isPrivate={true} />}>
           <Route element={<DashboardLayout />}>
             <Route path="/dashboard" element={<Dashboard />} />
+
             <Route path="/secretary" element={<Secretary />} />
             <Route path="/members" element={<Members />} />
             <Route path="/calls" element={<Calls />} />

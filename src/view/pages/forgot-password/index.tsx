@@ -3,10 +3,10 @@ import { z } from 'zod';
 
 import { useForm } from 'react-hook-form';
 
+import { ArrowLeft } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { useMutation } from 'react-query';
-import { Link } from 'react-router-dom';
-import { useAuth } from '../../../app/hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 import { authService } from '../../../app/services/authService';
 import { SigninParams } from '../../../app/services/authService/signin';
 import { Button } from '../../components/ui/button';
@@ -34,7 +34,9 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-export function Login() {
+export function ForgotPassword() {
+  const navigate = useNavigate();
+
   const {
     formState,
     register,
@@ -42,7 +44,6 @@ export function Login() {
   } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
-  const { signin: signIn } = useAuth();
 
   const { mutateAsync } = useMutation({
     mutationFn: async (data: SigninParams) => {
@@ -53,8 +54,9 @@ export function Login() {
   const handleSubmit = hookFormSubmit(async (data) => {
     try {
       const { accessToken } = await mutateAsync(data);
+      toast.success('E-mail enviado! Verifique sua caixa de entrada');
 
-      signIn(accessToken);
+      navigate('/');
     } catch {
       toast.error('Credenciais inválidas!');
     }
@@ -64,11 +66,16 @@ export function Login() {
     <div className="w-full h-screen flex">
       <Card className="w-full max-w-[380px] m-auto">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl">Fazer Login</CardTitle>
-          <CardDescription>Entre com sua conta</CardDescription>
+          <CardTitle className="text-2xl flex items-center gap-2">
+            <ArrowLeft size={20} onClick={() => navigate('/')} />
+            Recuperar acesso
+          </CardTitle>
+          <CardDescription>
+            Você receberá um e-mail para com uma <br /> confirmação de cadastro.
+          </CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4 w-fil">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
               <Input
@@ -76,30 +83,12 @@ export function Login() {
                 id="email"
                 type="email"
                 placeholder="m@example.com"
-                error={formState.errors.password?.message}
               />
               {formState.errors.email && (
                 <span className="text-xs text-red-500">
                   {formState.errors.email.message}
                 </span>
               )}
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="password">Senha</Label>
-              <Input
-                {...register('password')}
-                id="password"
-                type="password"
-                error={formState.errors.password?.message}
-              />
-              {formState.errors.password && (
-                <span className="text-xs text-red-500">
-                  {formState.errors.password.message}
-                </span>
-              )}
-              <button className="text-left max-w-[140px] text-sm text-zinc-100">
-                <Link to="/forget-password">Esqueceu sua senha?</Link>
-              </button>
             </div>
           </form>
         </CardContent>
@@ -110,7 +99,7 @@ export function Login() {
             isLoading={false}
             disabled={false}
           >
-            Entrar
+            Recuperar
           </Button>
         </CardFooter>
       </Card>
