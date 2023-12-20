@@ -8,9 +8,17 @@ import { useMutation } from 'react-query';
 import { useAuth } from '../../../app/hooks/useAuth';
 import { authService } from '../../../app/services/authService';
 import { SigninParams } from '../../../app/services/authService/signin';
-import img from '../../../assets/images/login.jpg';
 import { Button } from '../../components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '../../components/ui/card';
 import { Input } from '../../components/ui/input';
+import { Label } from '../../components/ui/label';
 
 const schema = z.object({
   email: z
@@ -26,7 +34,11 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 export function Login() {
-  const { register, handleSubmit: hookFormSubmit } = useForm<FormData>({
+  const {
+    formState,
+    register,
+    handleSubmit: hookFormSubmit,
+  } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
   const { signin: signIn } = useAuth();
@@ -48,44 +60,57 @@ export function Login() {
   });
 
   return (
-    <div className="w-full h-screen flex justify-between max-sm:justify-center">
-      <div className="p-4 bg-slate w-1/2  flex items-center text-right justify-center flex-col ">
-        <h1 className="text-gray-900 text-2xl font-bold tracking-[-1px]">
-          Bem vindo!
-        </h1>
-        <p className=" text-gray-700 tracking-[-0.5px] text-base leading-6">
-          A plataforma da ADMSA
-        </p>
-
-        <form
-          onSubmit={handleSubmit}
-          action=""
-          className="mt-[60px] w-[350px] flex flex-col gap-4 "
-        >
-          <Input
-            placeholder="Email"
-            {...register('email')}
-            // error={errors.email?.message}
-          />
-          <Input
-            placeholder="Senha"
-            {...register('password')}
-            // error={errors.password?.message}
-          />
-
-          <Button type="submit" className="mt-2">
+    <div className="w-full h-screen flex">
+      <Card className="w-full max-w-[380px] m-auto">
+        <CardHeader className="space-y-1">
+          <CardTitle className="text-2xl">Fazer Login</CardTitle>
+          <CardDescription>Entre com sua conta</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="grid gap-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                {...register('email')}
+                id="email"
+                type="email"
+                placeholder="m@example.com"
+                error={formState.errors.password?.message}
+              />
+              {formState.errors.email && (
+                <span className="text-xs text-red-500">
+                  {formState.errors.email.message}
+                </span>
+              )}
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="password">Senha</Label>
+              <Input
+                {...register('password')}
+                id="password"
+                type="password"
+                error={formState.errors.password?.message}
+              />
+              {formState.errors.password && (
+                <span className="text-xs text-red-500">
+                  {formState.errors.password.message}
+                </span>
+              )}
+              <p className="text-sm text-zinc-100">Esqueceu sua senha?</p>
+            </div>
+          </form>
+        </CardContent>
+        <CardFooter>
+          <Button
+            className="w-full"
+            onClick={handleSubmit}
+            isLoading={false}
+            disabled={false}
+          >
             Entrar
           </Button>
-        </form>
-      </div>
-
-      <div className="w-1/2 bg-indigo-900 max-sm:hidden">
-        <img
-          className="w-full h-screen  object-cover"
-          src={img}
-          alt="foto de uma mulher com um lindo vestido azul e uma rapaz com um lindo terno cinza"
-        />
-      </div>
+        </CardFooter>
+      </Card>
     </div>
   );
 }
