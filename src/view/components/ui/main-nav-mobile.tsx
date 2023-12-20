@@ -14,7 +14,7 @@ import {
 
 export function MainNavMobile() {
   const navigate = useNavigate();
-  const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const [_, setIsSheetOpen] = useState(false);
 
   const handleItemClick = (href: string) => {
     navigate(`${href}`);

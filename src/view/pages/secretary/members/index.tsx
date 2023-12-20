@@ -25,23 +25,8 @@ const CHURCH_MOCK = [
   },
 ];
 
-const OFFICE_MOCK = [
-  {
-    name: 'COOPERADOR',
-  },
-  {
-    name: 'DIACONO',
-  },
-  {
-    name: 'PRESBITERO',
-  },
-];
-
 export function Members() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedChurch, setSelectedChurch] = useState<string | undefined>(
-    undefined,
-  );
 
   return (
     <div className="w-full ">
@@ -82,7 +67,7 @@ export function Members() {
 
             <p>Informações Ministerias</p>
             <div className="flex gap-4 ">
-              <Select defaultValue={selectedChurch}>
+              <Select>
                 <SelectTrigger className="w-[180px] text-left py-2 px-4 border text-muted-foreground  rounded">
                   <SelectValue placeholder="IGREJA" />
                 </SelectTrigger>

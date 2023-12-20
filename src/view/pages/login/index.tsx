@@ -26,16 +26,12 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 export function Login() {
-  const {
-    register,
-    handleSubmit: hookFormSubmit,
-    formState: { errors },
-  } = useForm<FormData>({
+  const { register, handleSubmit: hookFormSubmit } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
   const { signin: signIn } = useAuth();
 
-  const { mutateAsync, isLoading } = useMutation({
+  const { mutateAsync } = useMutation({
     mutationFn: async (data: SigninParams) => {
       return authService.signin(data);
     },
