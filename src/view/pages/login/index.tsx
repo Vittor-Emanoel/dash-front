@@ -76,7 +76,6 @@ export function Login() {
                 id="email"
                 type="email"
                 placeholder="m@example.com"
-                error={formState.errors.password?.message}
               />
               {formState.errors.email && (
                 <span className="text-xs text-red-500">
@@ -86,20 +85,16 @@ export function Login() {
             </div>
             <div className="grid gap-2">
               <Label htmlFor="password">Senha</Label>
-              <Input
-                {...register('password')}
-                id="password"
-                type="password"
-                error={formState.errors.password?.message}
-              />
+              <Input {...register('password')} id="password" type="password" />
               {formState.errors.password && (
                 <span className="text-xs text-red-500">
                   {formState.errors.password.message}
                 </span>
               )}
-              <button className="text-left max-w-[140px] text-sm text-zinc-100">
-                <Link to="/forget-password">Esqueceu sua senha?</Link>
-              </button>
+
+              <Link to="/forget-password" className="text-sm text-zinc-200">
+                Esqueceu sua senha?
+              </Link>
             </div>
           </form>
         </CardContent>
