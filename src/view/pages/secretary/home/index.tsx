@@ -1,5 +1,12 @@
-import { CalendarDays, Church, PhoneCall, Users2 } from 'lucide-react';
+import {
+  Book,
+  CalendarRangeIcon,
+  PhoneCall,
+  Speech,
+  Users2,
+} from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { HeaderPages } from '../../../components/HeaderPages';
 import {
   Card,
   CardContent,
@@ -12,64 +19,94 @@ export function Secretary() {
 
   return (
     <>
-      <div className="flex-1 space-y-4 p-8 pt-6">
-        <div className="pb-4">
-          <h2 className="text-2xl tracking-tight max-md:text-xl max-md:font-bold">
-            Secretaria
-          </h2>
-          <p className="text-base text-muted-foreground max-md:text-sm">
-            Aqui estão as principais informações sobre a secretaria da Igreja.
-          </p>
-        </div>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          <Card onClick={() => navigate('/members')}>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Membros</CardTitle>
-              <Users2 size={20} className="text-zinc-300" />
-            </CardHeader>
-            <CardContent>
-              <p className="text-xs text-muted-foreground">
-                Clique aqui para realizar cadastro, busca, edição e deleção de
-                membros.
-              </p>
-            </CardContent>
-          </Card>
-          <Card onClick={() => navigate('/calls')}>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Chamada</CardTitle>
-              <PhoneCall size={20} className="text-zinc-300" />
-            </CardHeader>
-            <CardContent>
-              <p className="text-xs text-muted-foreground">
-                Clique aqui para criar uma nova chamada ou buscar por uma.
-              </p>
-            </CardContent>
-          </Card>
-          <Card onClick={() => navigate('/requirements')}>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">
-                Requerimentos
-              </CardTitle>
-              <Church size={20} className="text-zinc-300" />
-            </CardHeader>
-            <CardContent>
-              <p className="text-xs text-muted-foreground">
-                Faça o download dos arquivos modelo.
-              </p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">?</CardTitle>
-              <CalendarDays size={20} className="text-zinc-300" />
-            </CardHeader>
-            <CardContent>
-              {/* <p className="text-xs text-muted-foreground">
+      <div className="flex-1 ">
+        <HeaderPages
+          title="Secretaria"
+          subtitle="Aqui estão as principais informações sobre a secretaria da Igreja."
+        />
+      </div>
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <Card onClick={() => navigate('/members')}>
+          <CardHeader className="flex flex-row  items-center justify-between">
+            <CardTitle className="text-sm bg-primary-foreground p-2 rounded font-normal uppercase ">
+              Membros
+            </CardTitle>
+            <Users2 size={30} className="text-zinc-300" />
+          </CardHeader>
+          <CardContent className="space-y-2">
+            <p className="text-zinc-500 text-sm text-muted-foreground max-md:text-sm">
+              Clique aqui para realizar cadastro, busca, edição e deleção de
+              membros.
+            </p>
+          </CardContent>
+        </Card>
+        <Card onClick={() => navigate('/calls')}>
+          <CardHeader className="flex flex-row  items-center justify-between">
+            <CardTitle className="text-sm bg-primary-foreground p-2 rounded font-normal uppercase ">
+              Chamada
+            </CardTitle>
+            <PhoneCall size={30} className="text-zinc-300" />
+          </CardHeader>
+          <CardContent className="space-y-2">
+            <p className="text-zinc-500 text-sm text-muted-foreground max-md:text-sm">
+              Clique aqui para criar uma nova chamada ou buscar por uma.
+            </p>
+          </CardContent>
+        </Card>
 
-              </p> */}
-            </CardContent>
-          </Card>
-        </div>
+        <Card onClick={() => navigate('/requirements')}>
+          <CardHeader className="flex flex-row  items-center justify-between">
+            <CardTitle className="text-sm bg-primary-foreground p-2 rounded font-normal uppercase ">
+              Requerimentos
+            </CardTitle>
+            <PhoneCall size={30} className="text-zinc-300" />
+          </CardHeader>
+          <CardContent className="space-y-2">
+            <p className="text-zinc-500 text-sm text-muted-foreground max-md:text-sm">
+              Faça o download dos arquivos modelo.
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card onClick={() => navigate('/requirements')}>
+          <CardHeader className="flex flex-row  items-center justify-between">
+            <CardTitle className="text-sm bg-primary-foreground p-2 rounded font-normal uppercase ">
+              Eventos
+            </CardTitle>
+            <CalendarRangeIcon size={30} className="text-zinc-300" />
+          </CardHeader>
+          <CardContent className="space-y-2">
+            <p className="text-zinc-500 text-sm text-muted-foreground max-md:text-sm">
+              Clique aqui para criar um Evento ou buscar por um.
+            </p>
+          </CardContent>
+        </Card>
+        <Card className="cursor-not-allowed">
+          <CardHeader className="flex flex-row  items-center justify-between">
+            <CardTitle className="text-sm bg-primary-foreground p-2 rounded font-normal uppercase ">
+              Atas
+            </CardTitle>
+            <Book size={30} className="text-zinc-300" />
+          </CardHeader>
+          <CardContent className="space-y-2">
+            <p className="text-zinc-500 text-sm text-muted-foreground max-md:text-sm">
+              Em desenvolvimento...
+            </p>
+          </CardContent>
+        </Card>
+        <Card className="cursor-not-allowed">
+          <CardHeader className="flex flex-row  items-center justify-between">
+            <CardTitle className="text-sm bg-primary-foreground p-2 rounded font-normal uppercase ">
+              Comunicar os dirigentes
+            </CardTitle>
+            <Speech size={30} className="text-zinc-300" />
+          </CardHeader>
+          <CardContent className="space-y-2">
+            <p className="text-zinc-500 text-sm text-muted-foreground max-md:text-sm">
+              Em desenvolvimento...
+            </p>
+          </CardContent>
+        </Card>
       </div>
     </>
   );

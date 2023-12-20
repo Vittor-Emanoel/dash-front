@@ -1,6 +1,6 @@
 export const NAV_ITENS = [
   {
-    label: 'Home',
+    label: 'Início',
     href: '/dashboard',
   },
   {

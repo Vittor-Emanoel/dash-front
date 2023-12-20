@@ -48,6 +48,10 @@
   }
 }
 
+.container {
+  @apply mx-auto w-full max-w-[1280px] px-6;
+}
+
 @layer base {
   * {
     @apply border-border;
