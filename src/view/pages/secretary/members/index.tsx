@@ -7,6 +7,8 @@ import {
   SelectValue,
 } from '@radix-ui/react-select';
 import { useState } from 'react';
+import { Address } from '../../../../app/entities/Address';
+import { AddressService } from '../../../../app/providers/address';
 import { HeaderPages } from '../../../components/HeaderPages';
 import { Modal } from '../../../components/Modal';
 import { Button } from '../../../components/ui/button';
@@ -27,9 +29,29 @@ const CHURCH_MOCK = [
 
 export function Members() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [fullName, setFullName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [cep, setCep] = useState('');
+  const [address, setAddress] = useState<Address[] | null>([]);
+
+  async function handleSubmit(cep: string) {
+    const result = await AddressService.find({ cep });
+
+    console.log(cep);
+  }
+
+  type FormatPhoneFunction = (value: string) => string;
+
+  function handlePhoneChange(
+    target: { value: string },
+    setPhone: React.Dispatch<React.SetStateAction<string>>,
+    formatPhone: FormatPhoneFunction,
+  ) {
+    setPhone(formatPhone(target.value));
+  }
 
   return (
-    <div className="w-full ">
+    <div className="w-full">
       <div className="flex justify-between items-center">
         <HeaderPages
           title="Membros"
@@ -50,22 +72,33 @@ export function Members() {
           onClose={() => setIsModalOpen(false)}
         >
           <div className="flex flex-col space-y-6">
-            <div className="flex flex-col gap-4">
-              <p>Informações Gerais</p>
+            <p>Informações Gerais</p>
+            <div className="flex gap-4">
               <Input type="text" placeholder="Nome Completo *" />
-              <Input type="text" placeholder="Telefone *" />
+              <Input
+                type="text"
+                placeholder="Telefone *"
+                defaultValue={phone}
+                maxLength={15}
+                onChange={() => handlePhoneChange}
+              />
             </div>
 
             <div className="flex flex-col gap-4">
               <p>Endereço</p>
-              <Input placeholder="Endereço" />
               <div className="flex gap-4">
+                <Input placeholder="Endereço" />
                 <Input type="text" placeholder="N*" />
-                <Input type="text" placeholder="CEP" />
+                <Input
+                  type="text"
+                  onChange={() => setCep(cep)}
+                  placeholder="CEP"
+                />
               </div>
             </div>
 
             <p>Informações Ministerias</p>
+
             <div className="flex gap-4 ">
               <Select>
                 <SelectTrigger className="w-[180px] text-left py-2 px-4 border text-muted-foreground  rounded">
@@ -88,7 +121,9 @@ export function Members() {
             </div>
           </div>
 
-          <Button className="w-full">Salvar</Button>
+          <Button className="w-full" onClick={() => handleSubmit(cep)}>
+            Salvar
+          </Button>
         </Modal>
 
         <DataTable />

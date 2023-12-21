@@ -33,7 +33,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setSignedIn(false);
   }, []);
   return (
-    <AuthContext.Provider value={{ signedIn: false, signin, signout }}>
+    <AuthContext.Provider value={{ signedIn: true, signin, signout }}>
       {children}
       <LaunchScreen isLoading={false} />
     </AuthContext.Provider>

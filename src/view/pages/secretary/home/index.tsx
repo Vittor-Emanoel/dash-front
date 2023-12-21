@@ -1,6 +1,7 @@
 import {
   Book,
   CalendarRangeIcon,
+  HeartHandshake,
   PhoneCall,
   Speech,
   Users2,
@@ -59,7 +60,7 @@ export function Secretary() {
             <CardTitle className="text-sm bg-primary-foreground p-2 rounded font-normal uppercase ">
               Requerimentos
             </CardTitle>
-            <PhoneCall size={30} className="text-zinc-300" />
+            <HeartHandshake size={30} className="text-zinc-300" />
           </CardHeader>
           <CardContent className="space-y-2">
             <p className="text-zinc-500 text-sm text-muted-foreground max-md:text-sm">

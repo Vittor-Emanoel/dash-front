@@ -4,7 +4,6 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 
 import { ArrowLeft } from 'lucide-react';
-import toast from 'react-hot-toast';
 import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { authService } from '../../../app/services/authService';
@@ -52,14 +51,14 @@ export function ForgotPassword() {
   });
 
   const handleSubmit = hookFormSubmit(async (data) => {
-    try {
-      const { accessToken } = await mutateAsync(data);
-      toast.success('E-mail enviado! Verifique sua caixa de entrada');
-
-      navigate('/');
-    } catch {
-      toast.error('Credenciais inválidas!');
-    }
+    ///enviar e-mail
+    // try {
+    //   const { accessToken } = await mutateAsync(data);
+    //   toast.success('E-mail enviado! Verifique sua caixa de entrada');
+    //   navigate('/');
+    // } catch {
+    //   toast.error('Credenciais inválidas!');
+    // }
   });
 
   return (

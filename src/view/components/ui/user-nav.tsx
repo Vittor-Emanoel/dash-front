@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useAuth } from '../../../app/hooks/useAuth';
 import { Avatar, AvatarFallback, AvatarImage } from './avatar';
 import { Button } from './button';
@@ -40,8 +41,10 @@ export function UserNav() {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem className="cursor-pointer">
-            Perfil
-            <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+            <Link to="/profile">
+              Perfil
+              <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+            </Link>
           </DropdownMenuItem>
 
           <DropdownMenuItem className="cursor-pointer">

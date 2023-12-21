@@ -36,7 +36,7 @@ export function MainNavMobile() {
 
         <div className="flex flex-col space-y-5 mt-10">
           {NAV_ITENS.map(({ href, label }) => (
-            <SheetClose asChild>
+            <SheetClose asChild key={label}>
               <Button
                 key={label}
                 variant="outline"
