@@ -5,9 +5,9 @@ import { Login } from '../view/pages/login';
 
 import { ForgotPassword } from '../view/pages/forgot-password';
 import { Profile } from '../view/pages/profile';
-import { Calls } from '../view/pages/secretary/calls';
-import { Secretary } from '../view/pages/secretary/home';
-import { Members } from '../view/pages/secretary/members';
+import { Calls } from '../view/pages/secretary/Calls';
+import { Secretary } from '../view/pages/secretary/Home';
+import { Members } from '../view/pages/secretary/Members';
 import { Requirements } from '../view/pages/secretary/requirements';
 import { AuthGuard } from './authGuard';
 
