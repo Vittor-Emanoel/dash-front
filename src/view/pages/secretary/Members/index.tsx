@@ -1,7 +1,7 @@
 import { HeaderPages } from '../../../components/HeaderPages';
 import { Button } from '../../../components/ui/button';
 import { DataTable } from '../../../components/ui/dataTable';
-import { useMembers } from './MembersContext/useMembers';
+import { useMembers } from './MemberContext/useMembers';
 import { NewMemberModal } from './components/modals/NewMemberModal';
 
 export function Members() {

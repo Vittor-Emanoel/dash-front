@@ -24,49 +24,23 @@ import { ArrowUpDown } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from './button';
 
+import { Member } from '../../../app/entities/Member';
 import { Input } from './input';
 
-const data: Payment[] = [
+const data: Member[] = [
   {
     id: 'm5gr84i9',
-    office: 'Cooperador',
-    name: 'Vittor Emanoel Ramos',
+    officeId: 'Cooperador',
+    fullName: 'Vittor Emanoel Ramos',
     phone: '(11)99999-9999',
-  },
-  {
-    id: '3u1reuv4',
-    office: 'Cooperador',
-    name: 'Vittor Ramos Silva',
-    phone: '(11)99999-9999',
-  },
-  {
-    id: 'derv1ws0',
-    office: 'Cooperador',
-    name: 'Zézin ramos silva',
-    phone: '(11)99999-9999',
-  },
-  {
-    id: '5kma53ae',
-    office: 'Cooperador',
-    name: 'Zézin silva ramos',
-    phone: '(11)99999-9999',
-  },
-  {
-    id: 'bhqecj4p',
-    office: 'Cooperador',
-    name: 'Zézin ramos dores',
-    phone: '(11)99999-9999',
+    address: 'Rua asidkjadkjasdk',
+    cep: '09898909i',
+    churchId: 'ijisdjaisjdiasjd',
+    houseNumber: '323',
   },
 ];
 
-export type Payment = {
-  id: string;
-  office: string;
-  name: string;
-  phone: string;
-};
-
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Member>[] = [
   {
     accessorKey: 'name',
     header: ({ column }) => {
@@ -163,6 +137,7 @@ export function DataTable() {
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
+                  onClick={() => console.log('oi')}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>

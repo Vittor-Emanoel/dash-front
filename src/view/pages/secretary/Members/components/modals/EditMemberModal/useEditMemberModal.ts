@@ -15,7 +15,7 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-export function useNewMemberModalController() {
+export function useEditMemberModalController() {
   const {
     register,
     handleSubmit: hookFormSubmit,
@@ -26,7 +26,7 @@ export function useNewMemberModalController() {
     resolver: zodResolver(schema),
   });
 
-  const { isNewMemberModalOpen, closeNewMemberModal } = useMembers();
+  const { isEditMemberModalOpen, closeEditMemberModal } = useMembers();
 
   const handleSubmit = hookFormSubmit((data) => {
     console.log(data);
@@ -34,8 +34,8 @@ export function useNewMemberModalController() {
 
   return {
     handleSubmit,
-    isNewMemberModalOpen,
-    closeNewMemberModal,
+    isEditMemberModalOpen,
+    closeEditMemberModal,
     errors,
     control,
     reset,
