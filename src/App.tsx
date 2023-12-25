@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { AuthProvider } from './app/contexts/AuthContext';
 import { ThemeProvider } from './app/contexts/ThemeProvider';
 import { Router } from './router';
-import { MembersProvider } from './view/pages/secretary/Members/MemberContext';
+import { MembersProvider } from './view/pages/secretary/Members/context';
 
 const queryClient = new QueryClient({
   defaultOptions: {

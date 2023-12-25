@@ -25,24 +25,79 @@ import { useState } from 'react';
 import { Button } from './button';
 
 import { Member } from '../../../app/entities/Member';
+import { IOffice } from '../../../app/entities/Office';
 import { Input } from './input';
 
 const data: Member[] = [
   {
     id: 'm5gr84i9',
-    officeId: 'Cooperador',
     fullName: 'Vittor Emanoel Ramos',
     phone: '(11)99999-9999',
     address: 'Rua asidkjadkjasdk',
     cep: '09898909i',
-    churchId: 'ijisdjaisjdiasjd',
     houseNumber: '323',
+    church: {
+      id: 'dkawdnkawndnawkd',
+      name: 'Sede',
+    },
+    office: {
+      id: 'adnmadnwjdnawjdnaw',
+      name: 'Cooperador',
+    },
+  },
+  {
+    id: 'm5gr84i9',
+    fullName: 'Vittor Emanoel Ramos',
+    phone: '(11)99999-9999',
+    address: 'Rua asidkjadkjasdk',
+    cep: '09898909i',
+    houseNumber: '323',
+    church: {
+      id: 'dkawdnkawndnawkd',
+      name: 'Sede',
+    },
+    office: {
+      id: 'adnmadnwjdnawjdnaw',
+      name: 'Cooperador',
+    },
+  },
+  {
+    id: 'm5gr84i9',
+    fullName: 'Vittor Emanoel Ramos',
+    phone: '(11)99999-9999',
+    address: 'Rua asidkjadkjasdk',
+    cep: '09898909i',
+    houseNumber: '323',
+    church: {
+      id: 'dkawdnkawndnawkd',
+      name: 'Sede',
+    },
+    office: {
+      id: 'adnmadnwjdnawjdnaw',
+      name: 'Cooperador',
+    },
+  },
+  {
+    id: 'm5gr84i9',
+    fullName: 'Vittor Emanoel Ramos',
+    phone: '(11)99999-9999',
+    address: 'Rua asidkjadkjasdk',
+    cep: '09898909i',
+    houseNumber: '323',
+    church: {
+      id: 'dkawdnkawndnawkd',
+      name: 'Sede',
+    },
+    office: {
+      id: 'adnmadnwjdnawjdnaw',
+      name: 'Cooperador',
+    },
   },
 ];
 
 export const columns: ColumnDef<Member>[] = [
   {
-    accessorKey: 'name',
+    accessorKey: 'fullName',
     header: ({ column }) => {
       return (
         <Button
@@ -55,7 +110,7 @@ export const columns: ColumnDef<Member>[] = [
       );
     },
     cell: ({ row }) => (
-      <div className="pl-4 capitalize">{row.getValue('name')}</div>
+      <div className="pl-4 capitalize">{row.getValue('fullName')}</div>
     ),
   },
   {
@@ -67,9 +122,9 @@ export const columns: ColumnDef<Member>[] = [
     accessorKey: 'office',
     header: 'Cargo',
     cell: ({ row }) => {
-      const office: string = row.getValue('office');
+      const office: IOffice = row.getValue('office');
 
-      return <p className="font-medium capitalize"> {office}</p>;
+      return <p className="font-medium capitalize">{office.name}</p>;
     },
   },
 ];
@@ -104,9 +159,11 @@ export function DataTable() {
       <div className="flex items-center py-4">
         <Input
           placeholder="Buscar por nome..."
-          value={(table.getColumn('name')?.getFilterValue() as string) ?? ''}
+          value={
+            (table.getColumn('fullName')?.getFilterValue() as string) ?? ''
+          }
           onChange={(event) =>
-            table.getColumn('name')?.setFilterValue(event.target.value)
+            table.getColumn('fullName')?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />

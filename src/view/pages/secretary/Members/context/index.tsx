@@ -30,7 +30,6 @@ export function MembersProvider({ children }: { children: React.ReactNode }) {
   const closeEditMemberModal = useCallback(() => {
     return setIsEditMemberModalOpen(false);
   }, []);
-  console.log('olá');
 
   return (
     <MembersContext.Provider

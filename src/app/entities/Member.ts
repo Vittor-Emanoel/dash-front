@@ -1,3 +1,6 @@
+import { IChurch } from './Church';
+import { IOffice } from './Office';
+
 export interface Member {
   id: string;
   fullName: string;
@@ -5,6 +8,6 @@ export interface Member {
   address: string;
   houseNumber: string;
   cep: string;
-  churchId: string;
-  officeId: string;
+  church: IChurch;
+  office: IOffice;
 }
