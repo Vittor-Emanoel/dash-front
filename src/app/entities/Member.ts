@@ -5,9 +5,9 @@ export interface Member {
   id: string;
   fullName: string;
   phone: string;
-  address: string;
+  street: string;
   houseNumber: string;
-  cep: string;
+  postalCode: string;
   church: IChurch;
   office: IOffice;
 }

@@ -1,11 +1,14 @@
 import { HeaderPages } from '../../../components/HeaderPages';
 import { Button } from '../../../components/ui/button';
-import { NewMemberModal } from './components/modals/NewMemberModal';
-import { TableMembers } from './components/table';
-import { useMembers } from './context/useMembers';
+import { useMembers } from './MembersContext/useMembers';
+import { EditMemberModal } from './components/Modals/EditMemberModal';
+import { NewMemberModal } from './components/Modals/NewMemberModal';
+import { TableMembers } from './components/Table';
+import { useMemberControler } from './useMemberController';
 
 export function Members() {
   const { openNewMemberModal } = useMembers();
+  const { members } = useMemberControler();
 
   return (
     <div className="w-full">
@@ -14,83 +17,15 @@ export function Members() {
           title="Membros"
           subtitle="Gerencie os membros de sua congregação de forma rápida e fácil."
         />
-        <Button className="w-[180px]" onClick={() => openNewMemberModal()}>
+        <Button className="w-[180px]" onClick={openNewMemberModal}>
           Criar novo
         </Button>
       </div>
-
-      <NewMemberModal />
-
       <div className="flex flex-col gap-4">
-        <TableMembers
-          data={[
-            {
-              id: '323231',
-              fullName: 'Vittor Emanoel Ramos Silva',
-              phone: '32321321321',
-              office: {
-                id: '3213213123',
-                name: 'Cooperador',
-              },
-              address: 'Rua Eduardo fellone',
-              houseNumber: '55A',
-              church: {
-                id: '123213213',
-                name: 'Sede',
-              },
-              cep: '98989898',
-            },
-            {
-              id: '323231',
-              fullName: 'Zézin Ramos Silva',
-              phone: '32321321321',
-              office: {
-                id: '3213213123',
-                name: 'Cooperador',
-              },
-              address: 'Rua Eduardo fellone',
-              houseNumber: '55A',
-              church: {
-                id: '123213213',
-                name: 'Sede',
-              },
-              cep: '98989898',
-            },
-            {
-              id: '323231',
-              fullName: 'Beatriz Bicuda do santo lima',
-              phone: '32321321321',
-              office: {
-                id: '3213213123',
-                name: 'Cooperador',
-              },
-              address: 'Rua Eduardo fellone',
-              houseNumber: '55A',
-              church: {
-                id: '123213213',
-                name: 'Sede',
-              },
-              cep: '98989898',
-            },
-            {
-              id: '323231',
-              fullName: 'Anthony',
-              phone: '32321321321',
-              office: {
-                id: '3213213123',
-                name: 'Cooperador',
-              },
-              address: 'Rua Eduardo fellone',
-              houseNumber: '55A',
-              church: {
-                id: '123213213',
-                name: 'Sede',
-              },
-              cep: '98989898',
-            },
-          ]}
-        />
+        <TableMembers data={members} />
       </div>
+      <NewMemberModal />
+      <EditMemberModal />
     </div>
   );
 }

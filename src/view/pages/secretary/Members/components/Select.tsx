@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Spinner } from '../../../../components/Spinner';
 import { cn } from '../../../../components/lib/lib';
 import {
   Select,
@@ -16,6 +17,7 @@ interface SelectDropdownProps {
   onChange?(value: string): void;
   value?: string;
   label: string;
+  isLoading: boolean;
   options: {
     id: string;
     name: string;
@@ -27,6 +29,7 @@ export function SelectDropdown({
   placeholder,
   options,
   onChange,
+  isLoading,
   label,
 }: SelectDropdownProps) {
   const [selectedValue, setSelectedValue] = useState(value ?? placeholder);
@@ -44,17 +47,23 @@ export function SelectDropdown({
       <SelectContent className="z-[100]">
         <SelectGroup>
           <SelectLabel>{label}</SelectLabel>
-          {options.map((option) => (
-            <SelectItem
-              className={cn(
-                selectedValue && 'text-sm transition-all translate-y-0',
-              )}
-              value={option.id}
-              key={option.id}
-            >
-              {option.name}
-            </SelectItem>
-          ))}
+          {!isLoading &&
+            options.map((option) => (
+              <SelectItem
+                className={cn(
+                  selectedValue && 'text-sm transition-all translate-y-0',
+                )}
+                value={option.id}
+                key={option.id}
+              >
+                {option.name}
+              </SelectItem>
+            ))}
+          {isLoading && (
+            <div className="w-full flex items-center justify-center p-4">
+              <Spinner />
+            </div>
+          )}
         </SelectGroup>
       </SelectContent>
     </Select>

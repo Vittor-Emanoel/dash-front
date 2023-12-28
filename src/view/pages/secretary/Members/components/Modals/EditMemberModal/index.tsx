@@ -4,27 +4,28 @@ import { Button } from '../../../../../../components/ui/button';
 import { Input } from '../../../../../../components/ui/input';
 
 import { TrashIcon } from 'lucide-react';
-import { Member } from '../../../../../../../app/entities/Member';
+import { useMembers } from '../../../MembersContext/useMembers';
+import { useMemberControler } from '../../../useMemberController';
 import { SelectDropdown } from '../../Select';
-import { useEditMemberModalController } from './useEditMemberModal';
+import { useEditMemberModalController } from './useEditMemberController';
 
-interface EditMemberModalProps {
-  open: boolean;
-  onClose(): void;
-  member: Member | null;
-}
+export function EditMemberModal() {
+  const { isEditMemberModalOpen, closeEditMemberModal } = useMembers();
 
-export function EditMemberModal({ open, onClose }: EditMemberModalProps) {
+  const { memberBeingEdited } = useMembers();
+  const { isLoadingChurchs, isLoadingOffices, office, church } =
+    useMemberControler();
+
   const { register, handleSubmit, errors, control } =
-    useEditMemberModalController();
+    useEditMemberModalController(memberBeingEdited);
 
   return (
     <Modal
       title="Editar membro"
-      open={open}
-      onClose={onClose}
+      open={isEditMemberModalOpen}
+      onClose={closeEditMemberModal}
       rightAction={
-        <button onClick={() => console.log('oia')}>
+        <button onClick={closeEditMemberModal}>
           <TrashIcon className="w-6 h-6 text-destructive" />
         </button>
       }
@@ -35,12 +36,14 @@ export function EditMemberModal({ open, onClose }: EditMemberModalProps) {
           <Input
             type="text"
             placeholder="Nome Completo *"
+            defaultValue={memberBeingEdited?.fullName}
             error={errors.fullName?.message}
             {...register('fullName')}
           />
           <Input
             type="text"
             placeholder="Telefone *"
+            defaultValue={memberBeingEdited?.phone}
             error={errors.phone?.message}
             {...register('phone')}
           />
@@ -49,20 +52,23 @@ export function EditMemberModal({ open, onClose }: EditMemberModalProps) {
         <div className="flex gap-1 ">
           <Input
             placeholder="Endereço"
-            error={errors.address?.message}
-            {...register('address')}
+            defaultValue={memberBeingEdited?.street}
+            error={errors.street?.message}
+            {...register('street')}
           />
           <Input
             type="text"
             placeholder="N*"
+            defaultValue={memberBeingEdited?.houseNumber}
             error={errors.houseNumber?.message}
             {...register('houseNumber')}
           />
           <Input
             type="text"
             placeholder="CEP *"
-            error={errors.cep?.message}
-            {...register('cep')}
+            defaultValue={memberBeingEdited?.postalCode}
+            error={errors.postalCode?.message}
+            {...register('postalCode')}
           />
         </div>
 
@@ -71,48 +77,34 @@ export function EditMemberModal({ open, onClose }: EditMemberModalProps) {
         <div className="flex gap-4 w-full justify-between">
           <Controller
             control={control}
-            name="churchId"
+            name="church"
+            defaultValue={memberBeingEdited?.church.name}
             render={({ field: { onChange, value } }) => (
               <SelectDropdown
                 placeholder="Selecione uma igreja"
-                error={errors.churchId?.message}
+                isLoading={isLoadingChurchs}
+                error={errors.church?.message}
                 onChange={onChange}
                 label="Igrejas"
                 value={value}
-                options={[
-                  {
-                    id: '1',
-                    name: 'Sede',
-                  },
-                  {
-                    id: '2',
-                    name: 'Vaz de Lima',
-                  },
-                  {
-                    id: '3',
-                    name: 'JD Lilah',
-                  },
-                ]}
+                options={church}
               />
             )}
           />
 
           <Controller
             control={control}
-            name="officeId"
+            name="office"
+            defaultValue={memberBeingEdited?.office.name}
             render={({ field: { onChange, value } }) => (
               <SelectDropdown
                 label="Cargos"
+                isLoading={isLoadingOffices}
                 placeholder="Selecione um cargo"
-                error={errors.officeId?.message}
+                error={errors.office?.message}
                 onChange={onChange}
                 value={value}
-                options={[
-                  {
-                    id: '1',
-                    name: 'Cooperador',
-                  },
-                ]}
+                options={office}
               />
             )}
           />

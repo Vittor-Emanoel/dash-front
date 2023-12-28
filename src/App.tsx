@@ -1,9 +1,9 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from 'react-hot-toast';
-import { QueryClient, QueryClientProvider } from 'react-query';
 import { AuthProvider } from './app/contexts/AuthContext';
 import { ThemeProvider } from './app/contexts/ThemeProvider';
 import { Router } from './router';
-import { MembersProvider } from './view/pages/secretary/Members/context';
+import { MembersProvider } from './view/pages/secretary/Members/MembersContext';
 
 const queryClient = new QueryClient({
   defaultOptions: {

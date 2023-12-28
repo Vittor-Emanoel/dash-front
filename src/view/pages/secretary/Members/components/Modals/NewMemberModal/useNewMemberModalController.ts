@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { useMembers } from '../../../context/useMembers';
+import { useMembers } from '../../../MembersContext/useMembers';
 
 const schema = z.object({
   fullName: z.string().nonempty('O nome é obrigatório!'),
