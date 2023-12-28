@@ -41,8 +41,8 @@ export function SelectDropdown({
 
   return (
     <Select value={value} onValueChange={handleSelect}>
-      <SelectTrigger className="w-[180px] ">
-        <SelectValue placeholder={selectedValue} />
+      <SelectTrigger className="w-[180px]">
+        <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent className="z-[100]">
         <SelectGroup>

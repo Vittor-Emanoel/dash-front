@@ -6,18 +6,36 @@ import { Input } from '../../../../../../components/ui/input';
 import { TrashIcon } from 'lucide-react';
 import { useMembers } from '../../../MembersContext/useMembers';
 import { useMemberControler } from '../../../useMemberController';
+import { ConfirmDeleteModal } from '../../ConfirmDeleteModal';
 import { SelectDropdown } from '../../Select';
 import { useEditMemberModalController } from './useEditMemberController';
 
 export function EditMemberModal() {
   const { isEditMemberModalOpen, closeEditMemberModal } = useMembers();
 
-  const { memberBeingEdited } = useMembers();
+  const {
+    memberBeingEdited,
+    isDeleteModalOpen,
+    closeDeleteModal,
+    openDeleteModal,
+  } = useMembers();
   const { isLoadingChurchs, isLoadingOffices, office, church } =
     useMemberControler();
 
   const { register, handleSubmit, errors, control } =
     useEditMemberModalController(memberBeingEdited);
+
+  if (isDeleteModalOpen) {
+    return (
+      <ConfirmDeleteModal
+        isLoading={false}
+        onClose={closeDeleteModal}
+        onConfirm={() => {}}
+        title={`Tem certeza que deseja excluir o membro "${memberBeingEdited?.fullName}" ?`}
+        description="Esta ação não poderá ser desfeita, ao confirmar você limpará o registro da base de dados"
+      />
+    );
+  }
 
   return (
     <Modal
@@ -25,7 +43,7 @@ export function EditMemberModal() {
       open={isEditMemberModalOpen}
       onClose={closeEditMemberModal}
       rightAction={
-        <button onClick={closeEditMemberModal}>
+        <button onClick={openDeleteModal}>
           <TrashIcon className="w-6 h-6 text-destructive" />
         </button>
       }
@@ -77,13 +95,13 @@ export function EditMemberModal() {
         <div className="flex gap-4 w-full justify-between">
           <Controller
             control={control}
-            name="church"
-            defaultValue={memberBeingEdited?.church.name}
+            name="churchId"
+            defaultValue={memberBeingEdited?.church.id}
             render={({ field: { onChange, value } }) => (
               <SelectDropdown
                 placeholder="Selecione uma igreja"
                 isLoading={isLoadingChurchs}
-                error={errors.church?.message}
+                error={errors.churchId?.message}
                 onChange={onChange}
                 label="Igrejas"
                 value={value}
@@ -94,14 +112,14 @@ export function EditMemberModal() {
 
           <Controller
             control={control}
-            name="office"
-            defaultValue={memberBeingEdited?.office.name}
+            name="officeId"
+            defaultValue={memberBeingEdited?.office.id}
             render={({ field: { onChange, value } }) => (
               <SelectDropdown
                 label="Cargos"
                 isLoading={isLoadingOffices}
                 placeholder="Selecione um cargo"
-                error={errors.office?.message}
+                error={errors.officeId?.message}
                 onChange={onChange}
                 value={value}
                 options={office}

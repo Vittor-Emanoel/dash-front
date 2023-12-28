@@ -9,8 +9,8 @@ const schema = z.object({
   street: z.string().optional(),
   houseNumber: z.string().nonempty('O número é obrigatório!'),
   postalCode: z.string().nonempty('O cep é obrigatório!'),
-  church: z.string(),
-  office: z.string(),
+  churchId: z.string(),
+  officeId: z.string(),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -31,8 +31,8 @@ export function useEditMemberModalController(member: Member | null) {
       street: member?.street,
       houseNumber: member?.houseNumber,
       postalCode: member?.postalCode,
-      church: member?.church.name,
-      office: member?.office.name,
+      churchId: member?.church.id,
+      officeId: member?.office.id,
     },
   });
 

@@ -24,6 +24,7 @@ export function Members() {
       <div className="flex flex-col gap-4">
         <TableMembers data={members} />
       </div>
+
       <NewMemberModal />
       <EditMemberModal />
     </div>

@@ -3,8 +3,8 @@ import { z } from 'zod';
 
 import { useForm } from 'react-hook-form';
 
+import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
-import { useMutation } from 'react-query';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../../app/hooks/useAuth';
 import { authService } from '../../../app/services/authService';
@@ -44,7 +44,7 @@ export function Login() {
   });
   const { signin: signIn } = useAuth();
 
-  const { mutateAsync, isLoading } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationFn: async (data: SigninParams) => {
       return authService.signin(data);
     },
@@ -102,8 +102,8 @@ export function Login() {
           <Button
             className="w-full"
             onClick={handleSubmit}
-            isLoading={isLoading}
-            disabled={isLoading}
+            isLoading={isPending}
+            disabled={isPending}
           >
             Entrar
           </Button>

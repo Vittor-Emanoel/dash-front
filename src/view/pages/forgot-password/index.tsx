@@ -3,8 +3,8 @@ import { z } from 'zod';
 
 import { useForm } from 'react-hook-form';
 
+import { useMutation } from '@tanstack/react-query';
 import { ArrowLeft } from 'lucide-react';
-import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { authService } from '../../../app/services/authService';
 import { SigninParams } from '../../../app/services/authService/signin';
@@ -70,7 +70,7 @@ export function ForgotPassword() {
             Recuperar acesso
           </CardTitle>
           <CardDescription>
-            Você receberá um e-mail para com uma <br /> confirmação de cadastro.
+            Você receberá um e-mail com uma <br /> confirmação de cadastro.
           </CardDescription>
         </CardHeader>
         <CardContent>
