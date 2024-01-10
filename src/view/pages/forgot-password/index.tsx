@@ -3,11 +3,8 @@ import { z } from 'zod';
 
 import { useForm } from 'react-hook-form';
 
-import { useMutation } from '@tanstack/react-query';
 import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { authService } from '../../../app/services/authService';
-import { SigninParams } from '../../../app/services/authService/signin';
 import { Button } from '../../components/ui/button';
 import {
   Card,
@@ -44,22 +41,15 @@ export function ForgotPassword() {
     resolver: zodResolver(schema),
   });
 
-  const { mutateAsync } = useMutation({
-    mutationFn: async (data: SigninParams) => {
-      return authService.signin(data);
-    },
-  });
+  // const { mutateAsync } = useMutation({
+  //   mutationFn: async (data: SigninParams) => {
+  //     return authService.signin(data);
+  //   },
+  // });
 
-  const handleSubmit = hookFormSubmit(async (data) => {
-    ///enviar e-mail
-    // try {
-    //   const { accessToken } = await mutateAsync(data);
-    //   toast.success('E-mail enviado! Verifique sua caixa de entrada');
-    //   navigate('/');
-    // } catch {
-    //   toast.error('Credenciais inválidas!');
-    // }
-  });
+  const handleSubmit = () => {
+    console.log('ola');
+  };
 
   return (
     <div className="w-full h-screen flex">

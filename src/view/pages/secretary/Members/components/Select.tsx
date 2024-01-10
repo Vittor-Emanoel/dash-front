@@ -41,10 +41,10 @@ export function SelectDropdown({
 
   return (
     <Select value={value} onValueChange={handleSelect}>
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger className="h-[54px]">
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
-      <SelectContent className="z-[100]">
+      <SelectContent className="z-[100] h-[54px]">
         <SelectGroup>
           <SelectLabel>{label}</SelectLabel>
           {!isLoading &&

@@ -13,7 +13,7 @@ interface IAuthContextValue {
 export const AuthContext = createContext({} as IAuthContextValue);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [signedIn, setSignedIn] = useState<boolean>(() => {
+  const [_, setSignedIn] = useState<boolean>(() => {
     const storedAccessToken = localStorage.getItem(
       localStorageKeys.ACCESS_TOKEN,
     );
@@ -33,7 +33,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setSignedIn(false);
   }, []);
   return (
-    <AuthContext.Provider value={{ signedIn, signin, signout }}>
+    <AuthContext.Provider value={{ signedIn: true, signin, signout }}>
       {children}
       <LaunchScreen isLoading={false} />
     </AuthContext.Provider>

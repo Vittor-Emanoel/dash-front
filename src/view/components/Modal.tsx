@@ -16,7 +16,6 @@ export function Modal({
   onClose,
   children,
   title,
-  className,
   rightAction,
 }: ModalProps) {
   return (
