@@ -33,11 +33,7 @@ type FormData = z.infer<typeof schema>;
 export function ForgotPassword() {
   const navigate = useNavigate();
 
-  const {
-    formState,
-    register,
-    handleSubmit: hookFormSubmit,
-  } = useForm<FormData>({
+  const { formState, register } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
 
