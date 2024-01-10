@@ -1,13 +1,13 @@
+import { useNavigate } from 'react-router-dom';
 import { HeaderPages } from '../../../components/HeaderPages';
 import { Button } from '../../../components/ui/button';
-import { useMembers } from './MembersContext/useMembers';
 import { EditMemberModal } from './components/Modals/EditMemberModal';
 import { NewMemberModal } from './components/Modals/NewMemberModal';
 import { TableMembers } from './components/Table';
 import { useMemberControler } from './useMemberController';
 
 export function Members() {
-  const { openNewMemberModal } = useMembers();
+  const navigate = useNavigate();
   const { members } = useMemberControler();
 
   return (
@@ -17,7 +17,7 @@ export function Members() {
           title="Membros"
           subtitle="Gerencie os membros de sua congregação de forma rápida e fácil."
         />
-        <Button className="w-[180px]" onClick={openNewMemberModal}>
+        <Button className="w-[180px]" onClick={() => navigate('/members/new')}>
           Criar novo
         </Button>
       </div>
