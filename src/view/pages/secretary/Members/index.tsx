@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom';
 import { HeaderPages } from '../../../components/HeaderPages';
 import { Button } from '../../../components/ui/button';
 import { EditMemberModal } from './components/Modals/EditMemberModal';
-import { NewMemberModal } from './components/Modals/NewMemberModal';
 import { TableMembers } from './components/Table';
 import { useMemberControler } from './useMemberController';
 
@@ -25,7 +24,6 @@ export function Members() {
         <TableMembers data={members} />
       </div>
 
-      <NewMemberModal />
       <EditMemberModal />
     </div>
   );

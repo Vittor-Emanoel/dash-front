@@ -62,7 +62,7 @@ export function Login() {
 
   return (
     <div className="w-full h-screen flex">
-      <Card className="w-full max-w-[380px] m-auto">
+      <Card className="w-full max-w-[380px] m-auto hover:none">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl">Fazer Login</CardTitle>
           <CardDescription>Entre com sua conta</CardDescription>

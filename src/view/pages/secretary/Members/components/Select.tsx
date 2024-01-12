@@ -44,7 +44,7 @@ export function SelectDropdown({
       <SelectTrigger className="h-[54px]">
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
-      <SelectContent className="z-[100] h-[54px]">
+      <SelectContent className="z-[100]">
         <SelectGroup>
           <SelectLabel>{label}</SelectLabel>
           {!isLoading &&

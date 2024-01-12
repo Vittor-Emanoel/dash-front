@@ -29,7 +29,6 @@ function NewMemberModalComponent() {
           <Input
             type="text"
             placeholder="Nome Completo *"
-            error={errors.fullName?.message}
             {...register('fullName')}
           />
           <Input

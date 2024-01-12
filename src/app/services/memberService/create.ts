@@ -3,11 +3,12 @@ import { httpClient } from '../httpClient';
 export interface CreateMemberParams {
   fullName: string;
   phone: string;
-  address: string;
+  street?: string | undefined;
   houseNumber: string;
-  cep: string;
+  postalCode: string;
   churchId: string;
   officeId: string;
+  shepherd_id: string;
 }
 
 export async function create(params: CreateMemberParams) {
