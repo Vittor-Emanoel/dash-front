@@ -1,11 +1,4 @@
-import {
-  Book,
-  CalendarRangeIcon,
-  HeartHandshake,
-  PhoneCall,
-  Speech,
-  Users2,
-} from 'lucide-react';
+import { Users2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { HeaderPages } from '../../../components/HeaderPages';
 import {
@@ -24,6 +17,7 @@ export function Secretary() {
         <HeaderPages
           title="Secretaria"
           subtitle="Aqui estão as principais informações sobre a secretaria da Igreja."
+          backPage={true}
         />
       </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -41,7 +35,7 @@ export function Secretary() {
             </p>
           </CardContent>
         </Card>
-        <Card onClick={() => navigate('/calls')}>
+        {/* <Card>
           <CardHeader className="flex flex-row  items-center justify-between">
             <CardTitle className="text-sm bg-primary-foreground p-2 rounded font-normal uppercase ">
               Chamada
@@ -107,7 +101,7 @@ export function Secretary() {
               Em desenvolvimento...
             </p>
           </CardContent>
-        </Card>
+        </Card> */}
       </div>
     </>
   );

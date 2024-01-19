@@ -1,6 +1,6 @@
+import { Spinner } from '@components/Spinner';
+import { cn } from '@components/lib/lib';
 import { useState } from 'react';
-import { Spinner } from '../../../../components/Spinner';
-import { cn } from '../../../../components/lib/lib';
 import {
   Select,
   SelectContent,

@@ -1,11 +1,11 @@
-import { Link } from 'react-router-dom';
+import { getNameInitialLetters } from '@app/utils/getNameInitialLetters';
+import { ArrowBigDown } from 'lucide-react';
 import { useAuth } from '../../../app/hooks/useAuth';
-import { Avatar, AvatarFallback, AvatarImage } from './avatar';
+import { Avatar, AvatarFallback } from './avatar';
 import { Button } from './button';
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -14,31 +14,33 @@ import {
 } from './dropdown-menu';
 
 export function UserNav() {
-  const { signout } = useAuth();
+  const { signout, user } = useAuth();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-          <Avatar className="h-8 w-8">
-            <AvatarImage
-              src="https://github.com/Vittor-Emanoel.png"
-              alt="@shadcn"
-            />
-            <AvatarFallback>VE</AvatarFallback>
+        <Button variant="ghost" className="relative h-8 w-8 rounded-full flex">
+          <Avatar className="h-10 w-10">
+            <AvatarFallback>
+              {getNameInitialLetters(user?.name ?? '')}
+            </AvatarFallback>
           </Avatar>
+          <ArrowBigDown />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56" align="end" forceMount>
+      <DropdownMenuContent className="w-56" align="start" forceMount>
         <DropdownMenuLabel className="font-normal">
-          <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none">vittor</p>
+          <div className="flex flex-col space-y-2">
+            <p className="text-sm font-medium leading-tight">{user?.name}</p>
             <p className="text-xs leading-none text-muted-foreground">
-              vittore.dev@gmail.com
+              {user?.email}
             </p>
+            <strong className="bg-secondary text-white p-2 rounded text-xs w-[100px] leading-none text-muted-foregroun block">
+              {user?.role === 'ADMIN' ? 'Administrador' : user?.role}
+            </strong>
           </div>
         </DropdownMenuLabel>
-        <DropdownMenuSeparator />
+        {/* <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem className="cursor-pointer">
             <Link to="/profile">
@@ -52,8 +54,12 @@ export function UserNav() {
             <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuGroup>
+        <DropdownMenuSeparator /> */}
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={signout} className="cursor-pointer">
+        <DropdownMenuItem
+          onClick={signout}
+          className="cursor-pointer hover:bg-primary-foreground"
+        >
           Sair
           <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>

@@ -4,7 +4,7 @@ import { httpClient } from '../httpClient';
 interface IResponse {
   id: string;
   name: string;
-  shepherd_id: string;
+  shepherdId: string;
   members: Member[];
 }
 export async function getAll(): Promise<IResponse[]> {

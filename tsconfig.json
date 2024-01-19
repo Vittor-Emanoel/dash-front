@@ -18,7 +18,16 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    //alises
+
+    "paths": {
+      "@components/*": ["./src/view/components/*"],
+      "@views/*": ["./src/view/*"],
+      "@pages/*": ["./src/view/pages/*"],
+      "@app/*": ["./src/app/*"]
+    }
   },
   "include": ["src", "public/vite-env.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]

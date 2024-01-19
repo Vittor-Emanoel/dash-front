@@ -1,30 +1,50 @@
+//utils
+
 import { useNavigate } from 'react-router-dom';
-import { HeaderPages } from '../../../components/HeaderPages';
-import { Button } from '../../../components/ui/button';
-import { EditMemberModal } from './components/Modals/EditMemberModal';
-import { TableMembers } from './components/Table';
 import { useMemberControler } from './useMemberController';
+
+//components
+
+import { HeaderPages } from '@components/HeaderPages';
+import { cn } from '@components/lib/lib';
+import { Button } from '@components/ui/button';
+import { PlusCircle } from 'lucide-react';
+import { useMediaQuery } from 'usehooks-ts';
+import { TableMembers } from './components/Table';
 
 export function Members() {
   const navigate = useNavigate();
   const { members } = useMemberControler();
 
+  const isMobile = useMediaQuery('(max-width: 768px)');
+
   return (
     <div className="w-full">
-      <div className="flex justify-between items-center">
+      <div
+        className={cn(
+          'flex justify-between items-center',
+          isMobile && 'flex-col pb-4 items-start',
+        )}
+      >
         <HeaderPages
           title="Membros"
-          subtitle="Gerencie os membros de sua congregação de forma rápida e fácil."
+          subtitle="Gerencie os membros de sua congregação."
+          backPage={true}
         />
-        <Button className="w-[180px]" onClick={() => navigate('/members/new')}>
+        <Button
+          className={cn(
+            'w-full max-w-[180px] flex items-center gap-4 ',
+            isMobile && 'w-full',
+          )}
+          onClick={() => navigate('/members/new')}
+        >
+          <PlusCircle size={18} />
           Criar novo
         </Button>
       </div>
       <div className="flex flex-col gap-4">
         <TableMembers data={members} />
       </div>
-
-      <EditMemberModal />
     </div>
   );
 }

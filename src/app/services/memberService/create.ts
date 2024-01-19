@@ -8,7 +8,6 @@ export interface CreateMemberParams {
   postalCode: string;
   churchId: string;
   officeId: string;
-  shepherd_id: string;
 }
 
 export async function create(params: CreateMemberParams) {

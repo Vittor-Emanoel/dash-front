@@ -44,7 +44,7 @@ export function Login() {
   });
   const { signin: signIn } = useAuth();
 
-  const { mutateAsync, isPending } = useMutation({
+  const { mutateAsync, isLoading } = useMutation({
     mutationFn: async (data: SigninParams) => {
       return authService.signin(data);
     },
@@ -102,8 +102,8 @@ export function Login() {
           <Button
             className="w-full"
             onClick={handleSubmit}
-            isLoading={isPending}
-            disabled={isPending}
+            isLoading={isLoading}
+            disabled={isLoading}
           >
             Entrar
           </Button>
