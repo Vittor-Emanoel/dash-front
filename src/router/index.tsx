@@ -5,13 +5,11 @@ import { Login } from '../view/pages/login';
 
 import { ForgotPassword } from '../view/pages/forgot-password';
 
-
-
 import { Secretary } from '@pages/secretary/Home';
 import { Members } from '../view/pages/secretary/Members';
 import { NewMember } from '../view/pages/secretary/Members/pages/newMember';
-
 import { AuthGuard } from './authGuard';
+import { EditMember } from '../view/pages/secretary/Members/pages/editMember';
 
 export function Router() {
   return (
@@ -19,7 +17,7 @@ export function Router() {
       <Routes>
         <Route element={<AuthGuard isPrivate={false} />}>
           <Route path="/" element={<Login />} />
-          <Route path="/forget-password" element={<ForgotPassword />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
         </Route>
       </Routes>
 
@@ -27,13 +25,10 @@ export function Router() {
         <Route element={<AuthGuard isPrivate={true} />}>
           <Route element={<DashboardLayout />}>
             <Route path="/dashboard" element={<Dashboard />} />
-
             <Route path="/secretary" element={<Secretary />} />
             <Route path="/members" element={<Members />} />
             <Route path="/members/new" element={<NewMember />} />
-
-
-            <Route path="/finance" element={<h1>oia</h1>} />
+            <Route path="/members/edit/:id" element={<EditMember />} />
           </Route>
         </Route>
       </Routes>

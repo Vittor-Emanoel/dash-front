@@ -6,15 +6,14 @@ import { Input } from '../../../../../components/ui/input';
 import { SelectDropdown } from '../../components/Select';
 import { Controller } from 'react-hook-form';
 import { CustomInput } from '../../../../../components/Input';
-import { useNewMemberController } from './useNewMemberControlle';
+import {useEditMemberController } from './useEditMemberController';
 import { useChurchs } from '@app/hooks/useChurchs';
 import { useOffices } from '@app/hooks/useOffices';
 
 
-
-export function NewMember() {
+export function EditMember() {
   const isMobile = useMediaQuery('(max-width: 768px)');
-  const {register,control, errors, handleSubmit, isLoading} = useNewMemberController()
+  const {register,control, errors, handleSubmit, isLoading} = useEditMemberController()
   const {church, isLoading: loadingChurchs} = useChurchs()
   const {office, isLoading: loadingOffices} = useOffices()
 
@@ -25,8 +24,8 @@ export function NewMember() {
         className="w-full max-w-[550px] md:pr-14 items-center justify-center "
       >
         <HeaderPages
-          title="Criar membro"
-          subtitle="insira as informações abaixo e crie um novo membro."
+          title="Editar Membro"
+          subtitle="insira as informações abaixo e edite as informações do membro."
           backPage={true}
         />
 

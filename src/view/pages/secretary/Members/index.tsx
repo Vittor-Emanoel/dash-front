@@ -17,6 +17,8 @@ export function Members() {
   const isMobile = useMediaQuery('(max-width: 768px)');
   const {members} = useMembers()
 
+
+
   return (
     <div className="w-full">
       <div

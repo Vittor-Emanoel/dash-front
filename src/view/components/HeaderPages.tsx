@@ -17,7 +17,7 @@ export function HeaderPages({ title, subtitle, backPage }: HeaderPagesProps) {
           {backPage && (
             <a
               onClick={() => navigate(-1)}
-              className="hover:bg-muted transition-colors p-2 rounded "
+              className="hover:bg-muted transition-colors p-2 rounded cursor-pointer"
             >
               <ArrowLeft />
             </a>

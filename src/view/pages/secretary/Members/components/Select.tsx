@@ -51,7 +51,7 @@ export function SelectDropdown({
             options.map((option) => (
               <SelectItem
                 className={cn(
-                  selectedValue && 'text-sm transition-all translate-y-0',
+                  selectedValue && 'text-sm transition-all translate-y-0 text-zinc-500',
                 )}
                 value={option.id}
                 key={option.id}

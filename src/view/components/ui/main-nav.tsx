@@ -19,9 +19,14 @@ export function MainNav({
       <div className="max-md:hidden">
         <h1
           className="font-bold text-indigo-500"
-          onClick={() => navigate('/dashboard')}
+
         >
-          <img className="w-12 h-12" src={logo} alt="" />
+          <img
+            className="w-12 h-12 cursor-pointer"
+            src={logo}
+            alt="Logo da assembleia de Deus ministério de Madureira"
+            onClick={() => navigate('/dashboard')}
+          />
         </h1>
       </div>
 
@@ -30,7 +35,7 @@ export function MainNav({
           <Link
             to={href}
             key={label}
-            className="text-sm font-normal p-4 rounded hover:bg-primary-foreground transition-colors"
+            className="text-sm font-normal p-4 rounded hover:bg-primary-foreground transition-colors "
           >
             {label}
           </Link>

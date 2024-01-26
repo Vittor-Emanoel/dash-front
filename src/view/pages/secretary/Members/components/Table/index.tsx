@@ -25,6 +25,7 @@ import { Button } from '../../../../../components/ui/button';
 import { Input } from '../../../../../components/ui/input';
 
 import { columns } from './columns';
+import { useNavigate } from 'react-router-dom';
 
 interface ITableMembersProps {
   data: Member[];
@@ -35,6 +36,7 @@ export function TableMembers({ data }: ITableMembersProps) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
+  const navigate = useNavigate();
 
 
   const table = useReactTable({
@@ -97,6 +99,7 @@ export function TableMembers({ data }: ITableMembersProps) {
                   <TableRow
                     key={row.id}
                     data-state={row.getIsSelected() && 'selected'}
+                    onClick={() => navigate(`/members/edit/${row.original.id}`)}
 
                   >
                     {row.getVisibleCells().map((cell) => (

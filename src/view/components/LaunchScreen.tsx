@@ -17,10 +17,10 @@ export function LaunchScreen({ isLoading }: LaunchScreenProps) {
       leaveFrom="opacity-100"
       leaveTo="opacity-0"
     >
-      <div className="bg-indigo-900 fixed top-0 left-0 w-full h-full grid place-items-center z-50 ">
+      <div className="bg-secondary fixed top-0 left-0 w-full h-full grid place-items-center z-50 ">
         <div className="flex flex-col items-center gap-4">
           <img src={logo} alt="" className="w-20 h-20" />
-          <Spinner className="text-indigo-900 fill-white" />
+          <Spinner className="text-primary-foreground fill-white" />
         </div>
       </div>
     </Transition>

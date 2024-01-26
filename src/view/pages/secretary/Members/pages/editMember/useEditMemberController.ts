@@ -19,7 +19,7 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-export function useNewMemberController() {
+export function useEditMemberController() {
   const navigate = useNavigate();
   const { refetch } = useMembers();
 
@@ -32,20 +32,24 @@ export function useNewMemberController() {
     resolver: zodResolver(schema),
   });
 
-  const { isLoading, mutateAsync } = useMutation(membersService.create);
+  const { isLoading, mutateAsync: updateTransaction } = useMutation(
+    membersService.update,
+  );
 
-  const handleSubmit = hookFormSubmit(async (data) => {
-    try {
-      await mutateAsync(data);
+  // const handleSubmit = hookFormSubmit(async (data) => {
+  //   try {
+  //     await updateTransaction({
+  //       id: par
+  //     });
 
-      toast.success('Membro cadastrado com sucesso!');
+  //     toast.success('Membro cadastrado com sucesso!');
 
-      navigate('/members');
-      refetch();
-    } catch (error) {
-      toast.error('Membro já cadastrado!');
-    }
-  });
+  //     navigate('/members');
+  //     refetch()
+  //   } catch (error) {
+  //     toast.error('Membro já cadastrado!');
+  //   }
+  // });
 
   return {
     handleSubmit,
