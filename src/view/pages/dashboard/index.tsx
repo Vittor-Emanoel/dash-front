@@ -6,13 +6,19 @@ import {
   CardHeader,
   CardTitle,
 } from '../../components/ui/card';
+import { useAuth } from '@app/hooks/useAuth';
+import { getFirstNameAndLastName } from '@app/utils/getFirstNameAndLastName';
+import { getPeriodOfDay } from '@app/utils/getPeriodOfDay';
 
 export function Dashboard() {
+  const {user} = useAuth()
+  const periodOfDay = getPeriodOfDay();
+
   return (
     <>
       <HeaderPages
-        title="Olá, Vittor"
-        subtitle="Seja bem vindo ao sistema adminstrativo da ADM-SANTO AMARO"
+        title={`Olá, ${getFirstNameAndLastName(user?.name!)}`}
+        subtitle={`Seja bem vindo, ${periodOfDay}!`}
       />
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 py-4">
         <Card>

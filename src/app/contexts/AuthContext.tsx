@@ -52,6 +52,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, [isError, signout]);
 
+
   return (
     <AuthContext.Provider
       value={{ signedIn: isSuccess && signedIn, user: data, signin, signout }}

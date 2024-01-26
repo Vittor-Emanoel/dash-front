@@ -4,61 +4,15 @@ import { HeaderPages } from '../../../../../components/HeaderPages';
 import { Button } from '../../../../../components/ui/button';
 import { Input } from '../../../../../components/ui/input';
 import { SelectDropdown } from '../../components/Select';
-
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Controller, useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
-import { z } from 'zod';
+import { Controller } from 'react-hook-form';
 import { CustomInput } from '../../../../../components/Input';
-import { useMemberControler } from '../../useMemberController';
+import { useNewMemberController } from './useNewMemberControlle';
 
-const schema = z.object({
-  fullName: z.string().nonempty('O nome é obrigatório!'),
-  phone: z.string().nonempty('O telefone é obrigatório!'),
-  street: z.string().nonempty('O endereço é obrigatório!'),
-  houseNumber: z.string().nonempty('O número é obrigatório!'),
-  postalCode: z.string().nonempty('O cep é obrigatório!'),
-  churchId: z.string(),
-  officeId: z.string(),
-});
 
-type FormData = z.infer<typeof schema>;
 
 export function NewMember() {
   const isMobile = useMediaQuery('(max-width: 768px)');
-  const navigate = useNavigate();
-
-  const {
-    church,
-    office,
-    refetch,
-    isLoadingChurchs,
-    isLoadingOffices,
-    mutateAsync,
-    isLoading,
-  } = useMemberControler();
-
-  const {
-    register,
-    handleSubmit: hookFormSubmit,
-    formState: { errors },
-    control,
-  } = useForm<FormData>({
-    resolver: zodResolver(schema),
-  });
-
-  const handleSubmit = hookFormSubmit(async (data) => {
-    try {
-      await mutateAsync(data);
-
-      toast.success('Membro cadastrado com sucesso!');
-
-      refetch();
-      navigate('/members');
-    } catch (error) {
-      toast.error('Membro já cadastrado!');
-    }
-  });
+  const {register,control, errors, handleSubmit, isLoading} = useNewMemberController()
 
   return (
     <div className="w-full flex justify-between ">
@@ -72,7 +26,7 @@ export function NewMember() {
           backPage={true}
         />
 
-        <div className="space-y-4">
+        <div className="space-y-4 ">
           <Input
             type="text"
             placeholder="Nome completo"
@@ -94,21 +48,24 @@ export function NewMember() {
             {...register('street')}
           />
 
-          <div className="flex gap-4">
-            <CustomInput
-              type="text"
-              mask="99999-999"
-              placeholder="Cep"
-              error={errors.postalCode?.message}
-              {...register('postalCode')}
-            />
-            <Input
+          <div className='grid grid-cols-2 gap-4'>
+          <Input
               type="text"
               placeholder="Número"
               error={errors.houseNumber?.message}
               {...register('houseNumber')}
             />
+
+            <CustomInput
+              type="text"
+              mask="99999-999"
+              placeholder="Cep"
+              className=' '
+              error={errors.postalCode?.message}
+              {...register('postalCode')}
+            />
           </div>
+
 
           <div className="flex gap-4 justify-between">
             <Controller
@@ -117,12 +74,12 @@ export function NewMember() {
               render={({ field: { onChange, value } }) => {
                 return (
                   <SelectDropdown
-                    isLoading={isLoadingChurchs}
+                    isLoading={false}
                     placeholder="Igreja"
                     label="Igrejas"
                     onChange={onChange}
                     value={value}
-                    options={church}
+                    options={[]}
                   />
                 );
               }}
@@ -133,13 +90,13 @@ export function NewMember() {
               render={({ field: { onChange, value } }) => {
                 return (
                   <SelectDropdown
-                    isLoading={isLoadingOffices}
+                    isLoading={false}
                     placeholder="Cargo"
                     error={'errors.churchId?.message'}
                     label="Cargos"
                     onChange={onChange}
                     value={value}
-                    options={office}
+                    options={[]}
                   />
                 );
               }}

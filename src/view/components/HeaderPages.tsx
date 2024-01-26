@@ -12,7 +12,7 @@ export function HeaderPages({ title, subtitle, backPage }: HeaderPagesProps) {
 
   return (
     <div className="py-8">
-      <div className="space-y-1 flex flex-col">
+      <div className=" flex flex-col">
         <div className="flex gap-2 items-center">
           {backPage && (
             <a

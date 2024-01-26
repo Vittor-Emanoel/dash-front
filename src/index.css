@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+
 @layer base {
   :root {
     --background: 240 10% 3.9%;
@@ -53,8 +56,36 @@
 }
 
 @layer base {
+  @font-face {
+    font-family: 'GeistSans';
+    font-weight: 400;
+    font-display: 'swap';
+    font-style: 'normal';
+    src: url("./assets/fonts/Geist-Regular.woff2") format('woff2'),
+          url("./assets/fonts/Geist-Regular.otf") format('oft'),
+  }
+
+  @font-face {
+    font-family: 'GeistSans';
+    font-weight: 500;
+    font-display: 'swap';
+    font-style: 'normal';
+    src: url("./assets/fonts/Geist-Medium.woff2") format('woff2'),
+          url("./assets/fonts/Geist-Medium.otf") format('otf'),
+  }
+
+  @font-face {
+    font-family: 'GeistSans';
+    font-weight: 600;
+    font-display: 'swap';
+    font-style: 'normal';
+    src: url("./assets/fonts/Geist-SemiBold.woff2") format('woff2'),
+          url("./assets/fonts/Geist-SemiBold.otf") format('otf'),
+  }
+
   * {
     @apply border-border;
+    font-family: GeistSans, sans-serif;
   }
   body {
     @apply bg-background text-foreground;

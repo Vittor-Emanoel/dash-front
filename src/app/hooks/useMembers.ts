@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { membersService } from '../services/memberService';
 
 export function useMembers() {
-  const { data, isFetching, refetch } = useQuery({
+  const { data, isFetching, refetch, error } = useQuery({
     queryKey: ['members'],
     queryFn: membersService.getAll,
     staleTime: Infinity,
@@ -12,5 +12,6 @@ export function useMembers() {
     members: data ?? [],
     isFetching,
     refetch,
+    error,
   };
 }

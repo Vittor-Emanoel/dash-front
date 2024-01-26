@@ -5,7 +5,7 @@ import { Login } from '../view/pages/login';
 
 import { ForgotPassword } from '../view/pages/forgot-password';
 
-import { Calls } from '../view/pages/secretary/Calls';
+
 
 import { Secretary } from '@pages/secretary/Home';
 import { Members } from '../view/pages/secretary/Members';
@@ -31,7 +31,7 @@ export function Router() {
             <Route path="/secretary" element={<Secretary />} />
             <Route path="/members" element={<Members />} />
             <Route path="/members/new" element={<NewMember />} />
-            <Route path="/calls" element={<Calls />} />
+
 
             <Route path="/finance" element={<h1>oia</h1>} />
           </Route>
