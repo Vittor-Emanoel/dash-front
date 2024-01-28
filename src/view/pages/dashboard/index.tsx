@@ -55,12 +55,7 @@ export function Dashboard() {
             <Layers3 size={30} className="text-zinc-300" />
           </CardHeader>
           <CardContent className="space-y-2">
-            <div
-              className={cn(
-                'text-3xl font-bold ',
-                isFetching && 'blur transitio',
-              )}
-            >
+            <div className={cn('text-3xl font-bold ', isFetching && '')}>
               {totalMembers}
             </div>
             <p className="text-zinc-500 text-sm text-muted-foreground max-md:text-sm">

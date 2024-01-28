@@ -19,13 +19,12 @@ import {
   TableRow,
 } from '../../../../../components/ui/table';
 
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { Member } from '../../../../../../app/entities/Member';
 import { Button } from '../../../../../components/ui/button';
 import { Input } from '../../../../../components/ui/input';
 
 import { useNavigate } from 'react-router-dom';
-import { MembersContext } from '../../context/MembersContext';
 import { columns } from './columns';
 
 interface ITableMembersProps {
@@ -38,7 +37,6 @@ export function TableMembers({ data }: ITableMembersProps) {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
   const navigate = useNavigate();
-  const { setMemberBeingEdited } = useContext(MembersContext);
 
   const table = useReactTable({
     data,
@@ -60,8 +58,6 @@ export function TableMembers({ data }: ITableMembersProps) {
   });
 
   function handleEditMember(member: Member) {
-    setMemberBeingEdited(member);
-
     navigate(`/members/edit/${member.id}`);
   }
 
