@@ -1,0 +1,19 @@
+import { useQuery } from '@tanstack/react-query';
+import { membersService } from '../services/memberService';
+
+export function useMemberById(id: string) {
+  const { isSuccess, data, isFetching, isError, refetch } = useQuery({
+    queryKey: ['member', id],
+    queryFn: () => membersService.getById(id!),
+
+    staleTime: Infinity,
+  });
+
+  return {
+    member: data ?? null,
+    isFetching,
+    refetch,
+    isError,
+    isSuccess,
+  };
+}

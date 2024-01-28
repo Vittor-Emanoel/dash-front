@@ -1,3 +1,4 @@
+import { IChurch } from '@app/entities/Church';
 import { ColumnDef } from '@tanstack/react-table';
 import { ArrowUpDown } from 'lucide-react';
 import { Member } from '../../../../../../app/entities/Member';
@@ -34,6 +35,15 @@ export const columns: ColumnDef<Member>[] = [
       const office: IOffice = row.getValue('office');
 
       return <p className="font-medium capitalize">{office.name}</p>;
+    },
+  },
+  {
+    accessorKey: 'church',
+    header: 'Igreja',
+    cell: ({ row }) => {
+      const church: IChurch = row.getValue('church');
+
+      return <p className="font-medium capitalize">{church.name}</p>;
     },
   },
 ];

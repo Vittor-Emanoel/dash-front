@@ -40,7 +40,7 @@ export function SelectDropdown({
   }
 
   return (
-    <Select value={value} onValueChange={handleSelect}>
+    <Select defaultValue={value} onValueChange={handleSelect}>
       <SelectTrigger className="h-[54px]">
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
@@ -51,7 +51,8 @@ export function SelectDropdown({
             options.map((option) => (
               <SelectItem
                 className={cn(
-                  selectedValue && 'text-sm transition-all translate-y-0 text-zinc-500',
+                  selectedValue &&
+                    'text-sm transition-all translate-y-0 text-zinc-500',
                 )}
                 value={option.id}
                 key={option.id}

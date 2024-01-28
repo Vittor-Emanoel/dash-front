@@ -1,11 +1,15 @@
-import { z } from 'zod';
+import { handleApiError } from '@app/errors/ApiError';
+import { useMemberById } from '@app/hooks/useMemberById';
+import { useMembers } from '@app/hooks/useMembers';
+import { membersService } from '@app/services/memberService';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
-import { useMutation } from '@tanstack/react-query';
-import { membersService } from '@app/services/memberService';
-import { useMembers } from '@app/hooks/useMembers';
+import { useNavigate, useParams } from 'react-router-dom';
+import { z } from 'zod';
 
 const schema = z.object({
   fullName: z.string().nonempty('O nome é obrigatório!'),
@@ -22,6 +26,15 @@ type FormData = z.infer<typeof schema>;
 export function useEditMemberController() {
   const navigate = useNavigate();
   const { refetch } = useMembers();
+  const { id } = useParams();
+  const { member, isError } = useMemberById(id!);
+
+  useEffect(() => {
+    if (isError) {
+      toast.error('Membro não existe!');
+      navigate('/members');
+    }
+  }, [isError]);
 
   const {
     register,
@@ -30,26 +43,33 @@ export function useEditMemberController() {
     control,
   } = useForm<FormData>({
     resolver: zodResolver(schema),
+    values: {
+      fullName: member?.fullName,
+      phone: member?.phone,
+      street: member?.street,
+      houseNumber: member?.houseNumber,
+      postalCode: member?.postalCode,
+      churchId: member?.churchId,
+      officeId: member?.officeId,
+    },
   });
 
-  const { isLoading, mutateAsync: updateTransaction } = useMutation(
+  const { isLoading, mutateAsync: updateMember } = useMutation(
     membersService.update,
   );
 
-  // const handleSubmit = hookFormSubmit(async (data) => {
-  //   try {
-  //     await updateTransaction({
-  //       id: par
-  //     });
+  const handleSubmit = hookFormSubmit(async (data) => {
+    try {
+      await await updateMember({ id: id!, ...data });
 
-  //     toast.success('Membro cadastrado com sucesso!');
+      toast.success('Membro atualizado com sucesso!');
 
-  //     navigate('/members');
-  //     refetch()
-  //   } catch (error) {
-  //     toast.error('Membro já cadastrado!');
-  //   }
-  // });
+      navigate('/members');
+      refetch();
+    } catch (error) {
+      handleApiError(error as AxiosError);
+    }
+  });
 
   return {
     handleSubmit,
@@ -57,5 +77,6 @@ export function useEditMemberController() {
     errors,
     control,
     isLoading,
+    member,
   };
 }

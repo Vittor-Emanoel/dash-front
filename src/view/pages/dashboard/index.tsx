@@ -1,3 +1,8 @@
+import { useAuth } from '@app/hooks/useAuth';
+import { useMembers } from '@app/hooks/useMembers';
+import { getFirstNameAndLastName } from '@app/utils/getFirstNameAndLastName';
+import { getPeriodOfDay } from '@app/utils/getPeriodOfDay';
+import { cn } from '@components/lib/lib';
 import { CalendarDays, Church, Layers3, Users2 } from 'lucide-react';
 import { HeaderPages } from '../../components/HeaderPages';
 import {
@@ -6,13 +11,13 @@ import {
   CardHeader,
   CardTitle,
 } from '../../components/ui/card';
-import { useAuth } from '@app/hooks/useAuth';
-import { getFirstNameAndLastName } from '@app/utils/getFirstNameAndLastName';
-import { getPeriodOfDay } from '@app/utils/getPeriodOfDay';
 
 export function Dashboard() {
-  const {user} = useAuth()
+  const { user } = useAuth();
   const periodOfDay = getPeriodOfDay();
+  const { members, isFetching } = useMembers();
+
+  const totalMembers = members.length;
 
   return (
     <>
@@ -29,7 +34,14 @@ export function Dashboard() {
             <Users2 size={30} className="text-zinc-300" />
           </CardHeader>
           <CardContent className="space-y-2">
-            <div className="text-3xl font-bold">50</div>
+            <div
+              className={cn(
+                'text-3xl font-bold ',
+                isFetching && 'blur transitio',
+              )}
+            >
+              {totalMembers}
+            </div>
             <p className="text-zinc-500 text-sm text-muted-foreground max-md:text-sm">
               Número total de membros.
             </p>
@@ -43,7 +55,14 @@ export function Dashboard() {
             <Layers3 size={30} className="text-zinc-300" />
           </CardHeader>
           <CardContent className="space-y-2">
-            <div className="text-3xl font-bold">50</div>
+            <div
+              className={cn(
+                'text-3xl font-bold ',
+                isFetching && 'blur transitio',
+              )}
+            >
+              {totalMembers}
+            </div>
             <p className="text-zinc-500 text-sm text-muted-foreground max-md:text-sm">
               Número total de obreiros.
             </p>
@@ -57,7 +76,14 @@ export function Dashboard() {
             <Church size={30} className="text-zinc-300" />
           </CardHeader>
           <CardContent className="space-y-2">
-            <div className="text-3xl font-bold">50</div>
+            <div
+              className={cn(
+                'text-3xl font-bold ',
+                isFetching && 'blur transitio',
+              )}
+            >
+              {totalMembers ?? 0}
+            </div>
             <p className="text-zinc-500 text-sm text-muted-foreground max-md:text-sm">
               Número total de congregados.
             </p>

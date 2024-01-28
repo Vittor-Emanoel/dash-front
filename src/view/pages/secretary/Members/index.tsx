@@ -4,20 +4,18 @@ import { useNavigate } from 'react-router-dom';
 
 //components
 
+import { useMembers } from '@app/hooks/useMembers';
 import { HeaderPages } from '@components/HeaderPages';
 import { cn } from '@components/lib/lib';
 import { Button } from '@components/ui/button';
 import { PlusCircle } from 'lucide-react';
 import { useMediaQuery } from 'usehooks-ts';
 import { TableMembers } from './components/Table';
-import { useMembers } from '@app/hooks/useMembers';
 
 export function Members() {
   const navigate = useNavigate();
   const isMobile = useMediaQuery('(max-width: 768px)');
-  const {members} = useMembers()
-
-
+  const { members, isLoading } = useMembers();
 
   return (
     <div className="w-full">

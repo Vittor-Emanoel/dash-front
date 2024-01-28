@@ -1,21 +1,20 @@
-import { useNavigate } from 'react-router-dom';
+import { useChurchs } from '@app/hooks/useChurchs';
+import { useOffices } from '@app/hooks/useOffices';
+import { Controller } from 'react-hook-form';
 import { useMediaQuery } from 'usehooks-ts';
 import { HeaderPages } from '../../../../../components/HeaderPages';
+import { CustomInput } from '../../../../../components/Input';
 import { Button } from '../../../../../components/ui/button';
 import { Input } from '../../../../../components/ui/input';
 import { SelectDropdown } from '../../components/Select';
-import { Controller } from 'react-hook-form';
-import { CustomInput } from '../../../../../components/Input';
-import {useEditMemberController } from './useEditMemberController';
-import { useChurchs } from '@app/hooks/useChurchs';
-import { useOffices } from '@app/hooks/useOffices';
-
+import { useEditMemberController } from './useEditMemberController';
 
 export function EditMember() {
   const isMobile = useMediaQuery('(max-width: 768px)');
-  const {register,control, errors, handleSubmit, isLoading} = useEditMemberController()
-  const {church, isLoading: loadingChurchs} = useChurchs()
-  const {office, isLoading: loadingOffices} = useOffices()
+  const { register, control, errors, handleSubmit, isLoading } =
+    useEditMemberController();
+  const { church, isLoading: loadingChurchs } = useChurchs();
+  const { office, isLoading: loadingOffices } = useOffices();
 
   return (
     <div className="w-full flex justify-between ">
@@ -36,12 +35,22 @@ export function EditMember() {
             error={errors.fullName?.message}
             {...register('fullName')}
           />
-          <CustomInput
-            type="text"
-            placeholder="Telefone"
-            mask="+55 (99) 99999-9999"
-            error={errors.phone?.message}
-            {...register('phone')}
+
+          <Controller
+            control={control}
+            name="phone"
+            render={({ field: { value } }) => {
+              return (
+                <CustomInput
+                  type="text"
+                  value={value}
+                  placeholder="Telefone"
+                  mask="+55 (99) 99999-9999"
+                  error={errors.phone?.message}
+                  {...register('phone')}
+                />
+              );
+            }}
           />
 
           <Input
@@ -51,24 +60,31 @@ export function EditMember() {
             {...register('street')}
           />
 
-          <div className='grid grid-cols-2 gap-4'>
-          <Input
+          <div className="grid grid-cols-2 gap-4">
+            <Input
               type="text"
               placeholder="Número"
               error={errors.houseNumber?.message}
               {...register('houseNumber')}
             />
 
-            <CustomInput
-              type="text"
-              mask="99999-999"
-              placeholder="Cep"
-              className=' '
-              error={errors.postalCode?.message}
-              {...register('postalCode')}
+            <Controller
+              control={control}
+              name="postalCode"
+              render={({ field: { value } }) => {
+                return (
+                  <CustomInput
+                    type="text"
+                    value={value}
+                    mask="99999-999"
+                    placeholder="Cep"
+                    error={errors.postalCode?.message}
+                    {...register('postalCode')}
+                  />
+                );
+              }}
             />
           </div>
-
 
           <div className="flex gap-4 justify-between">
             <Controller

@@ -1,7 +1,4 @@
-import { Member } from '@app/entities/Member';
 import { httpClient } from '../httpClient';
-import { IChurch } from '@app/entities/Church';
-import { IOffice } from '@app/entities/Office';
 
 export interface UpdateMemberParams {
   id: string;
@@ -10,12 +7,12 @@ export interface UpdateMemberParams {
   street: string;
   houseNumber: string;
   postalCode: string;
-  church: IChurch;
-  office: IOffice;
+  churchId: string;
+  officeId: string;
 }
 
 export async function update({ id, ...params }: UpdateMemberParams) {
-  const { data } = await httpClient.put(`/members/${id}`, params);
+  const { data } = await httpClient.patch(`/members/${id}`, params);
 
   return data;
 }

@@ -10,14 +10,9 @@ import { useAuth } from '../../../app/hooks/useAuth';
 import { authService } from '../../../app/services/authService';
 import { SigninParams } from '../../../app/services/authService/signin';
 import { Button } from '../../components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '../../components/ui/card';
+
+import logo from '../../../assets/images/logo.png'
+
 import { Input } from '../../components/ui/input';
 import { Label } from '../../components/ui/label';
 
@@ -62,13 +57,15 @@ export function Login() {
 
   return (
     <div className="w-full h-screen flex">
-      <Card className="w-full max-w-[380px] m-auto hover:none">
-        <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl">Fazer Login</CardTitle>
-          <CardDescription>Entre com sua conta</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4 w-fil">
+      <div className="w-full max-w-[380px] m-auto hover:bg-background space-y-6">
+        <header className="space-y-1 flex flex-col items-center ">
+          <img
+          className='w-20 h-20 mb-2'
+          src={logo} alt="Logo da assembleia de Deus em Santo amaro" />
+          <h1 className="text-2xl font-semibold leading-none tracking-tight">Fazer Login</h1>
+          <p className='text-sm text-muted-foreground'>Entre com sua conta</p>
+        </header>
+          <form onSubmit={handleSubmit} className="space-y-4 w-fil" autoComplete="off">
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
               <Input
@@ -92,23 +89,20 @@ export function Login() {
                 </span>
               )}
 
-              <Link to="/forget-password" className="text-sm text-zinc-200">
+              <Link to="/forgot-password" className="text-sm text-muted-foreground hover:text-white transition-colors">
                 Esqueceu sua senha?
               </Link>
             </div>
-          </form>
-        </CardContent>
-        <CardFooter>
           <Button
+            type='submit'
             className="w-full"
-            onClick={handleSubmit}
             isLoading={isLoading}
             disabled={isLoading}
           >
             Entrar
           </Button>
-        </CardFooter>
-      </Card>
+          </form>
+      </div>
     </div>
   );
 }

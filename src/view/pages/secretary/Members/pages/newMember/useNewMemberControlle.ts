@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { membersService } from '@app/services/memberService';
 import { useMembers } from '@app/hooks/useMembers';
+import { AxiosError } from 'axios';
+import { handleApiError } from '@app/errors/ApiError';
 
 const schema = z.object({
   fullName: z.string().nonempty('O nome é obrigatório!'),
@@ -43,7 +45,7 @@ export function useNewMemberController() {
       navigate('/members');
       refetch();
     } catch (error) {
-      toast.error('Membro já cadastrado!');
+      handleApiError(error as AxiosError);
     }
   });
 

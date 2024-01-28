@@ -19,13 +19,14 @@ import {
   TableRow,
 } from '../../../../../components/ui/table';
 
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Member } from '../../../../../../app/entities/Member';
 import { Button } from '../../../../../components/ui/button';
 import { Input } from '../../../../../components/ui/input';
 
-import { columns } from './columns';
 import { useNavigate } from 'react-router-dom';
+import { MembersContext } from '../../context/MembersContext';
+import { columns } from './columns';
 
 interface ITableMembersProps {
   data: Member[];
@@ -37,7 +38,7 @@ export function TableMembers({ data }: ITableMembersProps) {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
   const navigate = useNavigate();
-
+  const { setMemberBeingEdited } = useContext(MembersContext);
 
   const table = useReactTable({
     data,
@@ -58,10 +59,16 @@ export function TableMembers({ data }: ITableMembersProps) {
     },
   });
 
+  function handleEditMember(member: Member) {
+    setMemberBeingEdited(member);
+
+    navigate(`/members/edit/${member.id}`);
+  }
+
   return (
     <>
       <div className="w-full ">
-        <div className="flex items-center py-4">
+        <div className="flex items-center py-4 ">
           <Input
             placeholder="Buscar por nome..."
             value={
@@ -70,7 +77,6 @@ export function TableMembers({ data }: ITableMembersProps) {
             onChange={(event) =>
               table.getColumn('fullName')?.setFilterValue(event.target.value)
             }
-            className="max-w-sm"
           />
         </div>
         <div className="rounded-md border">
@@ -99,8 +105,8 @@ export function TableMembers({ data }: ITableMembersProps) {
                   <TableRow
                     key={row.id}
                     data-state={row.getIsSelected() && 'selected'}
-                    onClick={() => navigate(`/members/edit/${row.original.id}`)}
-
+                    className="cursor-pointer"
+                    onClick={() => handleEditMember(row.original)}
                   >
                     {row.getVisibleCells().map((cell) => (
                       <TableCell key={cell.id}>

@@ -12,8 +12,8 @@ export function DashboardLayout() {
   const isDesktop = useMediaQuery('(min-width: 768px )');
 
   return (
-    <div className="container">
-      <div className="w-full flex h-16 items-center mt-2 ">
+    <div className="container ">
+      <div className="w-full flex h-16 items-center mt-4 ">
         {isMobile && <MainNavMobile />}
         {isDesktop && <MainNav />}
 

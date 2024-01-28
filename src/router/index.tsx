@@ -10,6 +10,8 @@ import { Members } from '../view/pages/secretary/Members';
 import { NewMember } from '../view/pages/secretary/Members/pages/newMember';
 import { AuthGuard } from './authGuard';
 import { EditMember } from '../view/pages/secretary/Members/pages/editMember';
+import { MembersProvider } from '../view/pages/secretary/Members/context/MembersContext';
+
 
 export function Router() {
   return (
@@ -26,9 +28,9 @@ export function Router() {
           <Route element={<DashboardLayout />}>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/secretary" element={<Secretary />} />
-            <Route path="/members" element={<Members />} />
-            <Route path="/members/new" element={<NewMember />} />
-            <Route path="/members/edit/:id" element={<EditMember />} />
+                <Route path="/members" element={<Members />} />
+                <Route path="/members/new" element={<NewMember />} />
+                <Route path="/members/edit/:id" element={<EditMember />} />
           </Route>
         </Route>
       </Routes>
