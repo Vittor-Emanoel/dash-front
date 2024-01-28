@@ -1,22 +1,20 @@
-import { useNavigate } from 'react-router-dom';
+import { useChurchs } from '@app/hooks/useChurchs';
+import { useOffices } from '@app/hooks/useOffices';
+import { Controller } from 'react-hook-form';
 import { useMediaQuery } from 'usehooks-ts';
 import { HeaderPages } from '../../../../../components/HeaderPages';
+import { CustomInput } from '../../../../../components/Input';
 import { Button } from '../../../../../components/ui/button';
 import { Input } from '../../../../../components/ui/input';
 import { SelectDropdown } from '../../components/Select';
-import { Controller } from 'react-hook-form';
-import { CustomInput } from '../../../../../components/Input';
 import { useNewMemberController } from './useNewMemberControlle';
-import { useChurchs } from '@app/hooks/useChurchs';
-import { useOffices } from '@app/hooks/useOffices';
-
-
 
 export function NewMember() {
   const isMobile = useMediaQuery('(max-width: 768px)');
-  const {register,control, errors, handleSubmit, isLoading} = useNewMemberController()
-  const {church, isLoading: loadingChurchs} = useChurchs()
-  const {office, isLoading: loadingOffices} = useOffices()
+  const { register, control, errors, handleSubmit, isLoading } =
+    useNewMemberController();
+  const { church, isLoading: loadingChurchs } = useChurchs();
+  const { office, isLoading: loadingOffices } = useOffices();
 
   return (
     <div className="w-full flex justify-between ">
@@ -52,8 +50,8 @@ export function NewMember() {
             {...register('street')}
           />
 
-          <div className='grid grid-cols-2 gap-4'>
-          <Input
+          <div className="grid grid-cols-2 gap-4">
+            <Input
               type="text"
               placeholder="Número"
               error={errors.houseNumber?.message}
@@ -64,12 +62,11 @@ export function NewMember() {
               type="text"
               mask="99999-999"
               placeholder="Cep"
-              className=' '
+              className=" "
               error={errors.postalCode?.message}
               {...register('postalCode')}
             />
           </div>
-
 
           <div className="flex gap-4 justify-between">
             <Controller

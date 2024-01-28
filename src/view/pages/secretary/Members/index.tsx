@@ -15,7 +15,7 @@ import { TableMembers } from './components/Table';
 export function Members() {
   const navigate = useNavigate();
   const isMobile = useMediaQuery('(max-width: 768px)');
-  const { members, isLoading } = useMembers();
+  const { members } = useMembers();
 
   return (
     <div className="w-full">
