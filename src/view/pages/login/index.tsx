@@ -11,7 +11,7 @@ import { authService } from '../../../app/services/authService';
 import { SigninParams } from '../../../app/services/authService/signin';
 import { Button } from '../../components/ui/button';
 
-import logo from '../../../assets/images/logo.png'
+import logo from '../../../assets/images/logo.png';
 
 import { Input } from '../../components/ui/input';
 import { Label } from '../../components/ui/label';
@@ -56,52 +56,63 @@ export function Login() {
   });
 
   return (
-    <div className="w-full h-screen flex">
-      <div className="w-full max-w-[380px] m-auto hover:bg-background space-y-6">
+    <div className="w-full h-screen flex ">
+      <div className="w-full max-w-[380px] m-auto hover:bg-background space-y-6 p-4">
         <header className="space-y-1 flex flex-col items-center ">
           <img
-          className='w-20 h-20 mb-2'
-          src={logo} alt="Logo da assembleia de Deus em Santo amaro" />
-          <h1 className="text-2xl font-semibold leading-none tracking-tight">Fazer Login</h1>
-          <p className='text-sm text-muted-foreground'>Entre com sua conta</p>
+            className="w-20 h-20 mb-2"
+            src={logo}
+            alt="Logo da assembleia de Deus em Santo amaro"
+          />
+          <h1 className="text-2xl font-semibold leading-none tracking-tight">
+            Fazer Login
+          </h1>
+          <p className="text-sm text-muted-foreground">Entre com sua conta</p>
         </header>
-          <form onSubmit={handleSubmit} className="space-y-4 w-fil" autoComplete="off">
-            <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                {...register('email')}
-                id="email"
-                type="email"
-                placeholder="m@example.com"
-              />
-              {formState.errors.email && (
-                <span className="text-xs text-red-500">
-                  {formState.errors.email.message}
-                </span>
-              )}
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="password">Senha</Label>
-              <Input {...register('password')} id="password" type="password" />
-              {formState.errors.password && (
-                <span className="text-xs text-red-500">
-                  {formState.errors.password.message}
-                </span>
-              )}
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-4 w-fil"
+          autoComplete="off"
+        >
+          <div className="grid gap-2">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              {...register('email')}
+              id="email"
+              type="email"
+              placeholder="m@example.com"
+            />
+            {formState.errors.email && (
+              <span className="text-xs text-red-500">
+                {formState.errors.email.message}
+              </span>
+            )}
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="password">Senha</Label>
+            <Input {...register('password')} id="password" type="password" />
+            {formState.errors.password && (
+              <span className="text-xs text-red-500">
+                {formState.errors.password.message}
+              </span>
+            )}
 
-              <Link to="/forgot-password" className="text-sm text-muted-foreground hover:text-white transition-colors">
-                Esqueceu sua senha?
-              </Link>
-            </div>
+            <Link
+              to="/forgot-password"
+              className="text-sm text-muted-foreground hover:text-white transition-colors"
+            >
+              Esqueceu sua senha?
+            </Link>
+          </div>
           <Button
-            type='submit'
+            type="submit"
             className="w-full"
             isLoading={isLoading}
             disabled={isLoading}
           >
             Entrar
           </Button>
-          </form>
+        </form>
       </div>
     </div>
   );
