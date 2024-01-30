@@ -2,6 +2,7 @@ import { handleApiError } from '@app/errors/ApiError';
 import { useMemberById } from '@app/hooks/useMemberById';
 import { useMembers } from '@app/hooks/useMembers';
 import { membersService } from '@app/services/memberService';
+import { sleep } from '@app/utils/sleep';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
@@ -27,7 +28,7 @@ export function useEditMemberController() {
   const navigate = useNavigate();
   const { refetch } = useMembers();
   const { id } = useParams();
-  const { member, isError } = useMemberById(id!);
+  const { member, isError, isLoading: isLoadingMember } = useMemberById(id!);
 
   useEffect(() => {
     if (isError) {
@@ -71,6 +72,8 @@ export function useEditMemberController() {
     }
   });
 
+  sleep(1000);
+
   return {
     handleSubmit,
     register,
@@ -78,5 +81,6 @@ export function useEditMemberController() {
     control,
     isLoading,
     member,
+    isLoadingMember,
   };
 }

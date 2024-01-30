@@ -5,10 +5,14 @@ import { cn } from '../lib/lib';
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string;
+  children?: React.ReactNode;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, id, type, error, ...props }, ref: Ref<HTMLInputElement>) => {
+  (
+    { className, children, id, type, error, ...props },
+    ref: Ref<HTMLInputElement>,
+  ) => {
     return (
       <div className="">
         <input

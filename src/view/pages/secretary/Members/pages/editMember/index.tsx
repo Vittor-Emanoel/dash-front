@@ -7,12 +7,19 @@ import { CustomInput } from '../../../../../components/Input';
 import { Button } from '../../../../../components/ui/button';
 import { Input } from '../../../../../components/ui/input';
 import { SelectDropdown } from '../../components/Select';
+import { EditMemberSkeleton } from '../../components/editMemberFormSkeleton';
 import { useEditMemberController } from './useEditMemberController';
 
 export function EditMember() {
   const isMobile = useMediaQuery('(max-width: 768px)');
-  const { register, control, errors, handleSubmit, isLoading } =
-    useEditMemberController();
+  const {
+    register,
+    control,
+    errors,
+    handleSubmit,
+    isLoading,
+    isLoadingMember,
+  } = useEditMemberController();
   const { church, isLoading: loadingChurchs } = useChurchs();
   const { office, isLoading: loadingOffices } = useOffices();
 
@@ -29,98 +36,103 @@ export function EditMember() {
         />
 
         <div className="space-y-4 ">
-          <Input
-            type="text"
-            placeholder="Nome completo"
-            error={errors.fullName?.message}
-            {...register('fullName')}
-          />
+          {!isLoadingMember && (
+            <>
+              <Input
+                type="text"
+                placeholder="Nome completo"
+                error={errors.fullName?.message}
+                {...register('fullName')}
+              />
 
-          <Controller
-            control={control}
-            name="phone"
-            render={({ field: { value } }) => {
-              return (
-                <CustomInput
+              <Controller
+                control={control}
+                name="phone"
+                render={({ field: { value } }) => {
+                  return (
+                    <CustomInput
+                      type="text"
+                      value={value}
+                      placeholder="Telefone"
+                      mask="+55 (99) 99999-9999"
+                      error={errors.phone?.message}
+                      {...register('phone')}
+                    />
+                  );
+                }}
+              />
+
+              <Input
+                type="text"
+                placeholder="Endereço"
+                error={errors.street?.message}
+                {...register('street')}
+              />
+
+              <div className="grid grid-cols-2 gap-4">
+                <Input
                   type="text"
-                  value={value}
-                  placeholder="Telefone"
-                  mask="+55 (99) 99999-9999"
-                  error={errors.phone?.message}
-                  {...register('phone')}
+                  placeholder="Número"
+                  error={errors.houseNumber?.message}
+                  {...register('houseNumber')}
                 />
-              );
-            }}
-          />
 
-          <Input
-            type="text"
-            placeholder="Endereço"
-            error={errors.street?.message}
-            {...register('street')}
-          />
+                <Controller
+                  control={control}
+                  name="postalCode"
+                  render={({ field: { value } }) => {
+                    return (
+                      <CustomInput
+                        type="text"
+                        value={value}
+                        mask="99999-999"
+                        placeholder="Cep"
+                        error={errors.postalCode?.message}
+                        {...register('postalCode')}
+                      />
+                    );
+                  }}
+                />
+              </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <Input
-              type="text"
-              placeholder="Número"
-              error={errors.houseNumber?.message}
-              {...register('houseNumber')}
-            />
-
-            <Controller
-              control={control}
-              name="postalCode"
-              render={({ field: { value } }) => {
-                return (
-                  <CustomInput
-                    type="text"
-                    value={value}
-                    mask="99999-999"
-                    placeholder="Cep"
-                    error={errors.postalCode?.message}
-                    {...register('postalCode')}
-                  />
-                );
-              }}
-            />
-          </div>
-
-          <div className="flex gap-4 justify-between">
-            <Controller
-              control={control}
-              name="churchId"
-              render={({ field: { onChange, value } }) => {
-                return (
-                  <SelectDropdown
-                    isLoading={loadingChurchs}
-                    placeholder="Igreja"
-                    label="Igrejas"
-                    onChange={onChange}
-                    value={value}
-                    options={church}
-                  />
-                );
-              }}
-            />
-            <Controller
-              control={control}
-              name="officeId"
-              render={({ field: { onChange, value } }) => {
-                return (
-                  <SelectDropdown
-                    isLoading={loadingOffices}
-                    placeholder="Cargo"
-                    error={'errors.churchId?.message'}
-                    label="Cargos"
-                    onChange={onChange}
-                    value={value}
-                    options={office}
-                  />
-                );
-              }}
-            />
-          </div>
+              <div className="flex gap-4 justify-between">
+                <Controller
+                  control={control}
+                  name="churchId"
+                  render={({ field: { onChange, value } }) => {
+                    return (
+                      <SelectDropdown
+                        isLoading={loadingChurchs}
+                        placeholder="Igreja"
+                        label="Igrejas"
+                        onChange={onChange}
+                        value={value}
+                        options={church}
+                      />
+                    );
+                  }}
+                />
+                <Controller
+                  control={control}
+                  name="officeId"
+                  render={({ field: { onChange, value } }) => {
+                    return (
+                      <SelectDropdown
+                        isLoading={loadingOffices}
+                        placeholder="Cargo"
+                        error={'errors.churchId?.message'}
+                        label="Cargos"
+                        onChange={onChange}
+                        value={value}
+                        options={office}
+                      />
+                    );
+                  }}
+                />
+              </div>
+            </>
+          )}
+          {isLoadingMember && <EditMemberSkeleton />}
         </div>
         <Button
           className="w-full h-12 mt-4"

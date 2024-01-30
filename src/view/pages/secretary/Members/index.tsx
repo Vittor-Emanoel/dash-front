@@ -11,11 +11,12 @@ import { Button } from '@components/ui/button';
 import { PlusCircle } from 'lucide-react';
 import { useMediaQuery } from 'usehooks-ts';
 import { TableMembers } from './components/Table';
+import { MemberTableSkeleton } from './components/Table/tableSkeleton';
 
 export function Members() {
   const navigate = useNavigate();
   const isMobile = useMediaQuery('(max-width: 768px)');
-  const { members } = useMembers();
+  const { members, isLoading } = useMembers();
 
   return (
     <div className="w-full">
@@ -42,7 +43,9 @@ export function Members() {
         </Button>
       </div>
       <div className="flex flex-col gap-4">
-        <TableMembers data={members} />
+        {isLoading && <MemberTableSkeleton />}
+
+        {!isLoading && <TableMembers data={members} />}
       </div>
     </div>
   );
