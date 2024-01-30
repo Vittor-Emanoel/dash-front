@@ -32,10 +32,7 @@ export function Members() {
           backPage={true}
         />
         <Button
-          className={cn(
-            'w-full max-w-[180px] flex items-center gap-4 ',
-            isMobile && 'w-full',
-          )}
+          className={cn(' flex items-center gap-4 h-12 ', isMobile && 'w-full')}
           onClick={() => navigate('/members/new')}
         >
           <PlusCircle size={18} />

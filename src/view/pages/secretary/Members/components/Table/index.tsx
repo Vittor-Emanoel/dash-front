@@ -63,18 +63,18 @@ export function TableMembers({ data }: ITableMembersProps) {
 
   return (
     <>
-      <div className="w-full ">
-        <div className="flex items-center py-4 ">
-          <Input
-            placeholder="Buscar por nome..."
-            value={
-              (table.getColumn('fullName')?.getFilterValue() as string) ?? ''
-            }
-            onChange={(event) =>
-              table.getColumn('fullName')?.setFilterValue(event.target.value)
-            }
-          />
-        </div>
+      <div className="w-full space-y-4">
+        <Input
+          placeholder="Buscar por nome..."
+          value={
+            (table.getColumn('fullName')?.getFilterValue() as string) ?? ''
+          }
+          onChange={(event) =>
+            table.getColumn('fullName')?.setFilterValue(event.target.value)
+          }
+          className="max-w-[400px]"
+        />
+
         <div className="rounded-md border">
           <Table>
             <TableHeader>
