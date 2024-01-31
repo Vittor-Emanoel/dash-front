@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 interface HeaderPagesProps {
   title: string;
   subtitle: string;
-  leftAction(): void;
+  leftAction?(): void;
   children?: ReactNode;
 }
 

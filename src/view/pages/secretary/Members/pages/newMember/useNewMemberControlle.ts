@@ -1,13 +1,13 @@
-import { z } from 'zod';
+import { handleApiError } from '@app/errors/ApiError';
+import { useMembers } from '@app/hooks/useMembers';
+import { membersService } from '@app/services/memberService';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import { useMutation } from '@tanstack/react-query';
-import { membersService } from '@app/services/memberService';
-import { useMembers } from '@app/hooks/useMembers';
-import { AxiosError } from 'axios';
-import { handleApiError } from '@app/errors/ApiError';
+import { z } from 'zod';
 
 const schema = z.object({
   fullName: z.string().nonempty('O nome é obrigatório!'),
@@ -37,8 +37,26 @@ export function useNewMemberController() {
   const { isLoading, mutateAsync } = useMutation(membersService.create);
 
   const handleSubmit = hookFormSubmit(async (data) => {
+    const {
+      fullName,
+      phone,
+      street,
+      houseNumber,
+      postalCode,
+      churchId,
+      officeId,
+    } = data;
+
     try {
-      await mutateAsync(data);
+      await mutateAsync({
+        fullName,
+        phone,
+        street,
+        houseNumber,
+        postalCode,
+        churchId,
+        officeId,
+      });
 
       toast.success('Membro cadastrado com sucesso!');
 

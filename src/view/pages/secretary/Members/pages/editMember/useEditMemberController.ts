@@ -19,14 +19,8 @@ const schema = z.object({
   street: z.string().nonempty('O endereço é obrigatório!'),
   houseNumber: z.string().nonempty('O número é obrigatório!'),
   postalCode: z.string().nonempty('O cep é obrigatório!'),
-  church: z.object({
-    id: z.string(),
-    name: z.string(),
-  }),
-  office: z.object({
-    id: z.string(),
-    name: z.string(),
-  }),
+  churchId: z.string(),
+  officeId: z.string(),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -81,25 +75,16 @@ export function useEditMemberController({
       street: member?.street,
       houseNumber: member?.houseNumber,
       postalCode: member?.postalCode,
-      church: member?.church,
-      office: member?.office,
+      churchId: member?.churchId,
+      officeId: member?.officeId,
     },
   });
 
   const handleSubmit = hookFormSubmit(async (data) => {
-    const { fullName, phone, street, houseNumber, postalCode, church, office } =
-      data;
-
     try {
       await await updateMember({
         id: memberId!,
-        fullName,
-        phone,
-        street,
-        houseNumber,
-        postalCode,
-        churchId: church.id,
-        officeId: office.id,
+        ...data,
       });
 
       toast.success('Membro atualizado com sucesso!');

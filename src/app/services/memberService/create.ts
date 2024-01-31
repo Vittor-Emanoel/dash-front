@@ -3,7 +3,7 @@ import { httpClient } from '../httpClient';
 export interface CreateMemberParams {
   fullName: string;
   phone: string;
-  street?: string | undefined;
+  street: string;
   houseNumber: string;
   postalCode: string;
   churchId: string;

@@ -34,8 +34,8 @@ export function EditMember() {
 
   const navigate = useNavigate();
 
-  const { church, isFetching: loadingChurchs } = useChurchs();
-  const { office, isFetching: loadingOffices } = useOffices();
+  const { church, isLoading: loadingChurchs } = useChurchs();
+  const { office, isLoading: loadingOffices } = useOffices();
 
   return (
     <div className="w-full flex justify-between">
@@ -54,7 +54,7 @@ export function EditMember() {
         <HeaderPages
           title="Editar Membro"
           subtitle="insira as informações abaixo e edite as informações do membro."
-          leftAction={() => navigate('/secretary')}
+          leftAction={() => navigate('/members')}
         >
           <Trash
             className="cursor-pointer rounded p-2 hover:bg-muted transition-colors"
@@ -126,12 +126,12 @@ export function EditMember() {
               <div className="flex gap-4 justify-between">
                 <Controller
                   control={control}
-                  name="church.name"
+                  name="churchId"
                   render={({ field: { onChange, value } }) => {
                     return (
                       <SelectDropdown
                         isLoading={loadingChurchs}
-                        placeholder={value}
+                        placeholder="Igreja"
                         label="Igrejas"
                         onChange={onChange}
                         value={value}
@@ -142,12 +142,12 @@ export function EditMember() {
                 />
                 <Controller
                   control={control}
-                  name="office.name"
+                  name="officeId"
                   render={({ field: { onChange, value } }) => {
                     return (
                       <SelectDropdown
                         isLoading={loadingOffices}
-                        placeholder={value}
+                        placeholder="Cargo"
                         error={'errors.churchId?.message'}
                         label="Cargos"
                         onChange={onChange}

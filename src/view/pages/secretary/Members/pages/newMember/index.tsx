@@ -80,6 +80,7 @@ export function NewMember() {
                   <SelectDropdown
                     isLoading={loadingChurchs}
                     placeholder="Igreja"
+                    error={'errors.churchId?.message'}
                     label="Igrejas"
                     onChange={onChange}
                     value={value}
