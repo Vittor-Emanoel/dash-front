@@ -13,7 +13,6 @@ import { Button } from '../../components/ui/button';
 
 import logo from '../../../assets/images/logo.png';
 
-import { Icon } from '@radix-ui/react-select';
 import { Input } from '../../components/ui/input';
 import { Label } from '../../components/ui/label';
 
@@ -92,7 +91,6 @@ export function Login() {
           <div className="grid gap-2">
             <Label htmlFor="password">Senha</Label>
             <Input {...register('password')} id="password" type="password" />
-            <Icon />
             {formState.errors.password && (
               <span className="text-xs text-red-500">
                 {formState.errors.password.message}

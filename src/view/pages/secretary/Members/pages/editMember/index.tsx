@@ -1,39 +1,67 @@
 import { useChurchs } from '@app/hooks/useChurchs';
 import { useOffices } from '@app/hooks/useOffices';
+import { Trash } from 'lucide-react';
 import { Controller } from 'react-hook-form';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useMediaQuery } from 'usehooks-ts';
 import { HeaderPages } from '../../../../../components/HeaderPages';
 import { CustomInput } from '../../../../../components/Input';
 import { Button } from '../../../../../components/ui/button';
 import { Input } from '../../../../../components/ui/input';
+import { DeleteMemberAlertModal } from '../../components/DeleteMemberAlert';
 import { SelectDropdown } from '../../components/Select';
 import { EditMemberSkeleton } from '../../components/editMemberFormSkeleton';
 import { useEditMemberController } from './useEditMemberController';
 
 export function EditMember() {
+  const { id } = useParams();
+
   const isMobile = useMediaQuery('(max-width: 768px)');
   const {
     register,
+    member,
     control,
     errors,
-    handleSubmit,
     isLoading,
     isLoadingMember,
-  } = useEditMemberController();
-  const { church, isLoading: loadingChurchs } = useChurchs();
-  const { office, isLoading: loadingOffices } = useOffices();
+    isDeleteModalOpen,
+    isLoadingDelete,
+    handleDeleteMember,
+    handleSubmit,
+    handleOpenDeleteModal,
+    handleCloseDeleteModal,
+  } = useEditMemberController({ memberId: id! });
+
+  const navigate = useNavigate();
+
+  const { church, isFetching: loadingChurchs } = useChurchs();
+  const { office, isFetching: loadingOffices } = useOffices();
 
   return (
-    <div className="w-full flex justify-between ">
+    <div className="w-full flex justify-between">
+      <DeleteMemberAlertModal
+        title="Excluir membro"
+        isLoading={isLoadingDelete}
+        onOpen={isDeleteModalOpen}
+        onClose={handleCloseDeleteModal}
+        onConfirm={handleDeleteMember}
+        description={`Tem certeza que deseja excluir o membro "${member?.fullName}"`}
+      />
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-[550px] md:pr-14 items-center justify-center "
+        className="w-full max-w-[550px] md:pr-14 items-center justify-center  "
       >
         <HeaderPages
           title="Editar Membro"
           subtitle="insira as informações abaixo e edite as informações do membro."
-          backPage={true}
-        />
+          leftAction={() => navigate('/secretary')}
+        >
+          <Trash
+            className="cursor-pointer rounded p-2 hover:bg-muted transition-colors"
+            size={38}
+            onClick={handleOpenDeleteModal}
+          />
+        </HeaderPages>
 
         <div className="space-y-4 ">
           {!isLoadingMember && (
@@ -98,12 +126,12 @@ export function EditMember() {
               <div className="flex gap-4 justify-between">
                 <Controller
                   control={control}
-                  name="churchId"
+                  name="church.name"
                   render={({ field: { onChange, value } }) => {
                     return (
                       <SelectDropdown
                         isLoading={loadingChurchs}
-                        placeholder="Igreja"
+                        placeholder={value}
                         label="Igrejas"
                         onChange={onChange}
                         value={value}
@@ -114,12 +142,12 @@ export function EditMember() {
                 />
                 <Controller
                   control={control}
-                  name="officeId"
+                  name="office.name"
                   render={({ field: { onChange, value } }) => {
                     return (
                       <SelectDropdown
                         isLoading={loadingOffices}
-                        placeholder="Cargo"
+                        placeholder={value}
                         error={'errors.churchId?.message'}
                         label="Cargos"
                         onChange={onChange}
@@ -134,12 +162,13 @@ export function EditMember() {
           )}
           {isLoadingMember && <EditMemberSkeleton />}
         </div>
+
         <Button
           className="w-full h-12 mt-4"
           isLoading={isLoading}
           disabled={isLoading}
         >
-          Cadastrar
+          Confirmar
         </Button>
       </form>
 

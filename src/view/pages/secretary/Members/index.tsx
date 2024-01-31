@@ -16,7 +16,7 @@ import { MemberTableSkeleton } from './components/Table/tableSkeleton';
 export function Members() {
   const navigate = useNavigate();
   const isMobile = useMediaQuery('(max-width: 768px)');
-  const { members, isLoading } = useMembers();
+  const { members, isFetching } = useMembers();
 
   return (
     <div className="w-full">
@@ -29,7 +29,7 @@ export function Members() {
         <HeaderPages
           title="Membros"
           subtitle="Gerencie os membros de sua congregação."
-          backPage={true}
+          leftAction={() => navigate('/secretary')}
         />
         <Button
           className={cn(' flex items-center gap-4 h-12 ', isMobile && 'w-full')}
@@ -40,9 +40,9 @@ export function Members() {
         </Button>
       </div>
       <div className="flex flex-col gap-4">
-        {isLoading && <MemberTableSkeleton />}
+        {isFetching && <MemberTableSkeleton />}
 
-        {!isLoading && <TableMembers data={members} />}
+        {!isFetching && <TableMembers data={members} />}
       </div>
     </div>
   );

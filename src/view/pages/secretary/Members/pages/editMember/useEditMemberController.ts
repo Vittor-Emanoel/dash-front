@@ -1,16 +1,17 @@
-import { handleApiError } from '@app/errors/ApiError';
-import { useMemberById } from '@app/hooks/useMemberById';
-import { useMembers } from '@app/hooks/useMembers';
-import { membersService } from '@app/services/memberService';
-import { sleep } from '@app/utils/sleep';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
-import { useEffect } from 'react';
+//react
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+
+//libs
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
-import { useNavigate, useParams } from 'react-router-dom';
 import { z } from 'zod';
+
+//utils
+import { useMemberById } from '@app/hooks/useMemberById';
+import { membersService } from '@app/services/memberService';
 
 const schema = z.object({
   fullName: z.string().nonempty('O nome é obrigatório!'),
@@ -18,17 +19,39 @@ const schema = z.object({
   street: z.string().nonempty('O endereço é obrigatório!'),
   houseNumber: z.string().nonempty('O número é obrigatório!'),
   postalCode: z.string().nonempty('O cep é obrigatório!'),
-  churchId: z.string(),
-  officeId: z.string(),
+  church: z.object({
+    id: z.string(),
+    name: z.string(),
+  }),
+  office: z.object({
+    id: z.string(),
+    name: z.string(),
+  }),
 });
 
 type FormData = z.infer<typeof schema>;
 
-export function useEditMemberController() {
+interface useEditMemberControllerProps {
+  memberId: string;
+}
+
+export function useEditMemberController({
+  memberId,
+}: useEditMemberControllerProps) {
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const { isLoading: isLoadingDelete, mutateAsync: removeAccount } =
+    useMutation(membersService.remove);
+  const { isLoading, mutateAsync: updateMember } = useMutation(
+    membersService.update,
+  );
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const { refetch } = useMembers();
-  const { id } = useParams();
-  const { member, isError, isLoading: isLoadingMember } = useMemberById(id!);
+
+  const {
+    member,
+    isError,
+    isLoading: isLoadingMember,
+  } = useMemberById(memberId!);
 
   useEffect(() => {
     if (isError) {
@@ -36,6 +59,14 @@ export function useEditMemberController() {
       navigate('/members');
     }
   }, [isError]);
+
+  function handleOpenDeleteModal() {
+    setIsDeleteModalOpen(true);
+  }
+
+  function handleCloseDeleteModal() {
+    setIsDeleteModalOpen(false);
+  }
 
   const {
     register,
@@ -50,37 +81,61 @@ export function useEditMemberController() {
       street: member?.street,
       houseNumber: member?.houseNumber,
       postalCode: member?.postalCode,
-      churchId: member?.churchId,
-      officeId: member?.officeId,
+      church: member?.church,
+      office: member?.office,
     },
   });
 
-  const { isLoading, mutateAsync: updateMember } = useMutation(
-    membersService.update,
-  );
-
   const handleSubmit = hookFormSubmit(async (data) => {
+    const { fullName, phone, street, houseNumber, postalCode, church, office } =
+      data;
+
     try {
-      await await updateMember({ id: id!, ...data });
+      await await updateMember({
+        id: memberId!,
+        fullName,
+        phone,
+        street,
+        houseNumber,
+        postalCode,
+        churchId: church.id,
+        officeId: office.id,
+      });
 
       toast.success('Membro atualizado com sucesso!');
 
+      queryClient.invalidateQueries({ queryKey: ['members'] });
       navigate('/members');
-      refetch();
     } catch (error) {
-      handleApiError(error as AxiosError);
+      toast.error('Erro ao Editar o membro!');
     }
   });
 
-  sleep(1000);
+  async function handleDeleteMember() {
+    try {
+      await removeAccount(memberId!);
+
+      queryClient.invalidateQueries({ queryKey: ['members'] });
+      toast.success('A Membro deletado com sucesso!');
+      handleCloseDeleteModal();
+      navigate('/members');
+    } catch {
+      toast.error('Erro ao deletar o membro!');
+    }
+  }
 
   return {
-    handleSubmit,
-    register,
+    isLoadingMember,
     errors,
     control,
     isLoading,
     member,
-    isLoadingMember,
+    isDeleteModalOpen,
+    isLoadingDelete,
+    register,
+    handleSubmit,
+    handleOpenDeleteModal,
+    handleCloseDeleteModal,
+    handleDeleteMember,
   };
 }

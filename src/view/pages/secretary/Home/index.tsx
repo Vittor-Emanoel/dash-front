@@ -17,7 +17,7 @@ export function Secretary() {
         <HeaderPages
           title="Secretaria"
           subtitle="Aqui estão as principais informações sobre a secretaria da Igreja."
-          backPage={true}
+          leftAction={() => navigate('/dashboard')}
         />
       </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">

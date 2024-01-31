@@ -1,6 +1,7 @@
 import { useChurchs } from '@app/hooks/useChurchs';
 import { useOffices } from '@app/hooks/useOffices';
 import { Controller } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { useMediaQuery } from 'usehooks-ts';
 import { HeaderPages } from '../../../../../components/HeaderPages';
 import { CustomInput } from '../../../../../components/Input';
@@ -16,6 +17,8 @@ export function NewMember() {
   const { church, isLoading: loadingChurchs } = useChurchs();
   const { office, isLoading: loadingOffices } = useOffices();
 
+  const navigate = useNavigate();
+
   return (
     <div className="w-full flex justify-between ">
       <form
@@ -25,7 +28,7 @@ export function NewMember() {
         <HeaderPages
           title="Criar membro"
           subtitle="insira as informações abaixo e crie um novo membro."
-          backPage={true}
+          leftAction={() => navigate('/members')}
         />
 
         <div className="space-y-4 ">

@@ -54,7 +54,7 @@ export function SelectDropdown({
                   selectedValue &&
                     'text-sm transition-all translate-y-0 text-zinc-500',
                 )}
-                value={option.id}
+                value={option.name}
                 key={option.id}
               >
                 {option.name}
