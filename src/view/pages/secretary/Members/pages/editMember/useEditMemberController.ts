@@ -75,8 +75,8 @@ export function useEditMemberController({
       street: member?.street,
       houseNumber: member?.houseNumber,
       postalCode: member?.postalCode,
-      churchId: member?.church.id,
-      officeId: member?.office.id,
+      churchId: member?.church?.id,
+      officeId: member?.office?.id,
     },
   });
 
