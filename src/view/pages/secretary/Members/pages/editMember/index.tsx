@@ -57,7 +57,7 @@ export function EditMember() {
           leftAction={() => navigate('/members')}
         >
           <Trash
-            className="cursor-pointer rounded p-2 hover:bg-muted transition-colors"
+            className="cursor-pointer rounded p-2 bg-muted hover:bg-muted-foreground hover:text-destructive transition-colors "
             size={38}
             onClick={handleOpenDeleteModal}
           />
@@ -131,11 +131,12 @@ export function EditMember() {
                     return (
                       <SelectDropdown
                         isLoading={loadingChurchs}
-                        placeholder="Igreja"
+                        placeholder={member?.church?.name ?? 'Igreja'}
                         label="Igrejas"
                         onChange={onChange}
                         value={value}
                         options={church}
+                        error={errors.churchId?.message}
                       />
                     );
                   }}
@@ -147,8 +148,8 @@ export function EditMember() {
                     return (
                       <SelectDropdown
                         isLoading={loadingOffices}
-                        placeholder="Cargo"
-                        error={'errors.churchId?.message'}
+                        placeholder={member?.office?.name ?? 'Cargo'}
+                        error={errors.officeId?.message}
                         label="Cargos"
                         onChange={onChange}
                         value={value}

@@ -19,8 +19,8 @@ const schema = z.object({
   street: z.string().nonempty('O endereço é obrigatório!'),
   houseNumber: z.string().nonempty('O número é obrigatório!'),
   postalCode: z.string().nonempty('O cep é obrigatório!'),
-  churchId: z.string(),
-  officeId: z.string(),
+  churchId: z.string({ required_error: 'Escolha uma igreja' }),
+  officeId: z.string({ required_error: 'Escolha um cargo' }),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -75,20 +75,21 @@ export function useEditMemberController({
       street: member?.street,
       houseNumber: member?.houseNumber,
       postalCode: member?.postalCode,
-      churchId: member?.churchId,
-      officeId: member?.officeId,
+      churchId: member?.church.id,
+      officeId: member?.office.id,
     },
   });
 
   const handleSubmit = hookFormSubmit(async (data) => {
     try {
-      await await updateMember({
+      await updateMember({
         id: memberId!,
         ...data,
       });
 
       toast.success('Membro atualizado com sucesso!');
 
+      queryClient.invalidateQueries({ queryKey: ['member', memberId!] });
       queryClient.invalidateQueries({ queryKey: ['members'] });
       navigate('/members');
     } catch (error) {

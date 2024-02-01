@@ -32,14 +32,10 @@ export function SelectDropdown({
 }: SelectDropdownProps) {
   const [selectedValue, setSelectedValue] = useState(value ?? placeholder);
 
-  console.log(value);
-  console.log(placeholder);
-
   function handleSelect(value: string) {
     setSelectedValue(value);
     onChange?.(value);
   }
-
   return (
     <Select defaultValue={value} onValueChange={handleSelect}>
       <SelectTrigger className="h-[54px]">

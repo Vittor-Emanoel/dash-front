@@ -25,12 +25,12 @@ export function HeaderPages({
             <ArrowLeft />
           </a>
 
-          <h2 className="text-3xl font-bold tracking-tight max-md:text-xl max-md:font-bold">
+          <h2 className="text-3xl font-bold  max-md:text-xl max-md:font-bold">
             {title}
           </h2>
         </div>
-        <div className="flex">
-          <p className="text-zinc-500 text-base text-muted-foreground max-md:text-sm">
+        <div className="flex gap-4">
+          <p className="text-zinc-500 text-base text-muted-foreground max-md:text-sm leading-relaxed">
             {subtitle}
           </p>
           {children}
