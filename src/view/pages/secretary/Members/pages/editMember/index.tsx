@@ -123,8 +123,6 @@ export function EditMember() {
                 />
               </div>
 
-              {console.log(member)}
-
               <div className="flex gap-4 justify-between">
                 <Controller
                   control={control}
