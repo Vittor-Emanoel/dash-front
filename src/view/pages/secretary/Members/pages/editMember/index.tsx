@@ -123,6 +123,8 @@ export function EditMember() {
                 />
               </div>
 
+              {console.log(member)}
+
               <div className="flex gap-4 justify-between">
                 <Controller
                   control={control}
@@ -134,7 +136,7 @@ export function EditMember() {
                         placeholder={member?.church?.name ?? 'Igreja'}
                         label="Igrejas"
                         onChange={onChange}
-                        value={value}
+                        value={member?.church?.id ?? value}
                         options={church}
                         error={errors.churchId?.message}
                       />
@@ -152,7 +154,7 @@ export function EditMember() {
                         error={errors.officeId?.message}
                         label="Cargos"
                         onChange={onChange}
-                        value={value}
+                        value={member?.office?.id ?? value}
                         options={office}
                       />
                     );
