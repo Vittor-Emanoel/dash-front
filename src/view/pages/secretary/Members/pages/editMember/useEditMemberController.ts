@@ -14,13 +14,13 @@ import { useMemberById } from '@app/hooks/useMemberById';
 import { membersService } from '@app/services/memberService';
 
 const schema = z.object({
-  fullName: z.string().nonempty('O nome é obrigatório!'),
-  phone: z.string().nonempty('O telefone é obrigatório!'),
-  street: z.string().nonempty('O endereço é obrigatório!'),
-  houseNumber: z.string().nonempty('O número é obrigatório!'),
-  postalCode: z.string().nonempty('O cep é obrigatório!'),
-  churchId: z.string({ required_error: 'Escolha uma igreja' }),
-  officeId: z.string({ required_error: 'Escolha um cargo' }),
+  fullName: z.string().min(1, 'O nome é obrigatório!'),
+  phone: z.string().min(1, 'O telefone é obrigatório!'),
+  street: z.string().min(1, 'O endereço é obrigatório!'),
+  houseNumber: z.string().min(1, 'O número é obrigatório!'),
+  postalCode: z.string().min(1, 'O cep é obrigatório!'),
+  churchId: z.string(),
+  officeId: z.string(),
 });
 
 type FormData = z.infer<typeof schema>;

@@ -10,11 +10,11 @@ import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 
 const schema = z.object({
-  fullName: z.string().nonempty('O nome é obrigatório!'),
-  phone: z.string().nonempty('O telefone é obrigatório!'),
-  street: z.string().nonempty('O endereço é obrigatório!'),
-  houseNumber: z.string().nonempty('O número é obrigatório!'),
-  postalCode: z.string().nonempty('O cep é obrigatório!'),
+  fullName: z.string().min(1, 'O nome é obrigatório!'),
+  phone: z.string().min(1, 'O telefone é obrigatório!'),
+  street: z.string().min(1, 'O endereço é obrigatório!'),
+  houseNumber: z.string().min(1, 'O número é obrigatório!'),
+  postalCode: z.string().min(1, 'O cep é obrigatório!'),
   churchId: z.string(),
   officeId: z.string(),
 });
