@@ -5,7 +5,7 @@ import { cn } from '../lib/lib';
 
 import logo from '../../../assets/images/adm.svg';
 
-export function MainNav({
+export function Header({
   className,
   ...props
 }: React.HTMLAttributes<HTMLElement>) {

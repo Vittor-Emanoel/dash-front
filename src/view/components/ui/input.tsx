@@ -10,7 +10,7 @@ export interface InputProps
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, id, type, error, ...props }, ref: Ref<HTMLInputElement>) => {
     return (
-      <div className="flex">
+      <div className="flex flex-col">
         <input
           type={type}
           className={cn(

@@ -12,7 +12,7 @@ import {
   SheetTrigger,
 } from './sheet';
 
-export function MainNavMobile() {
+export function HeaderMobile() {
   const navigate = useNavigate();
   const [_, setIsSheetOpen] = useState(false);
 

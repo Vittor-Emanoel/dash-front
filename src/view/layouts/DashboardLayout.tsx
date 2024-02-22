@@ -1,9 +1,10 @@
 import { Outlet } from 'react-router-dom';
 import { useMediaQuery } from 'usehooks-ts';
 
-import { MainNav } from '@components/ui/main-nav';
-import { MainNavMobile } from '@components/ui/main-nav-mobile';
+
 import { UserNav } from '@components/ui/user-nav';
+import { HeaderMobile } from '@components/ui/header-mobile';
+import { Header } from '@components/ui/header';
 
 export function DashboardLayout() {
   // const { theme, setTheme } = useTheme();
@@ -14,8 +15,8 @@ export function DashboardLayout() {
   return (
     <div className="container ">
       <div className="w-full flex h-16 items-center mt-4 ">
-        {isMobile && <MainNavMobile />}
-        {isDesktop && <MainNav />}
+        {isMobile && <HeaderMobile />}
+        {isDesktop && <Header />}
 
         <div className="ml-auto flex items-center space-x-4">
           <UserNav />
