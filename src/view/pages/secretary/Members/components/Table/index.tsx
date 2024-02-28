@@ -120,7 +120,7 @@ export function TableMembers({ data }: ITableMembersProps) {
                     colSpan={columns.length}
                     className="h-24 text-center"
                   >
-                    Membro não existe!
+                    Membro não encontrado!
                   </TableCell>
                 </TableRow>
               )}

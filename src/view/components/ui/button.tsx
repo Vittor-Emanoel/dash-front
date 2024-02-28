@@ -60,6 +60,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         <Comp
           className={cn(
             'disabled:bg-zinc-700 ',
+            isLoading && 'disabled:cursor-not-allowed ',
             buttonVariants({ variant, size, className }),
           )}
           ref={ref}

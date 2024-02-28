@@ -71,7 +71,7 @@ export function NewMember() {
             />
           </div>
 
-          <div className="flex gap-4 justify-between">
+          <div className="grid grid-cols-2 gap-4">
             <Controller
               control={control}
               name="churchId"
@@ -80,7 +80,7 @@ export function NewMember() {
                   <SelectDropdown
                     isLoading={loadingChurchs}
                     placeholder="Igreja"
-                    error={'errors.churchId?.message'}
+                    error={errors.churchId?.message}
                     label="Igrejas"
                     onChange={onChange}
                     value={value}
@@ -97,7 +97,7 @@ export function NewMember() {
                   <SelectDropdown
                     isLoading={loadingOffices}
                     placeholder="Cargo"
-                    error={'errors.churchId?.message'}
+                    error={errors.officeId?.message}
                     label="Cargos"
                     onChange={onChange}
                     value={value}
@@ -109,7 +109,7 @@ export function NewMember() {
           </div>
         </div>
         <Button
-          className="w-full h-12 mt-4"
+          className="w-full h-12 mt-4 "
           isLoading={isLoading}
           disabled={isLoading}
         >

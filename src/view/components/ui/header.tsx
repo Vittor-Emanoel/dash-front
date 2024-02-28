@@ -17,17 +17,12 @@ export function Header({
       {...props}
     >
       <div className="max-md:hidden">
-        <h1
-          className="font-bold text-indigo-500"
-
-        >
-          <img
-            className="w-12 h-12 cursor-pointer"
-            src={logo}
-            alt="Logo da assembleia de Deus ministério de Madureira"
-            onClick={() => navigate('/dashboard')}
-          />
-        </h1>
+        <img
+          className="w-12 h-12 cursor-pointer"
+          src={logo}
+          alt="Logo da assembleia de Deus ministério de Madureira"
+          onClick={() => navigate('/dashboard')}
+        />
       </div>
 
       <div className="max-md:hidden space-x-4">
