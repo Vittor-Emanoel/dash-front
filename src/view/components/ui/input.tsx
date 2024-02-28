@@ -1,15 +1,15 @@
 import { CrossCircledIcon } from '@radix-ui/react-icons';
-import { ComponentProps, ReactNode, Ref, forwardRef } from 'react';
+import { ComponentProps, Ref, forwardRef } from 'react';
 import { cn } from '../lib/lib';
 
 export interface InputProps extends ComponentProps<'input'> {
-  icon?: ReactNode;
   error?: string;
+  className?: string;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
   (
-    { className, id, type, error, icon, children, ...props },
+    { className, id, type, error, children, ...props },
     ref: Ref<HTMLInputElement>,
   ) => {
     return (

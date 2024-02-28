@@ -91,23 +91,24 @@ export function Login() {
               </span>
             )}
           </div>
+
           <div className="grid gap-2">
             <Label htmlFor="password">Senha</Label>
-            <div className="grid w-full max-w-sm items-center gap-1.5">
-              <div className="relative ">
-                <Input
-                  id="password"
-                  type={showPassword ? 'text' : 'password'}
-                  {...register('password')}
-                />
-                <button
-                  type="button"
-                  className="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6   text-gray-500 dark:text-gray-400"
-                  onClick={() => setShowPassword((state) => !state)}
-                >
-                  <EyeIcon size={24} open={showPassword} />
-                </button>
-              </div>
+
+            <div className="grid w-full max-w-sm items-center gap-1.5 relative">
+              <Input
+                id="password"
+                type={showPassword ? 'text' : 'password'}
+                className="pr-10"
+                {...register('password')}
+              />
+              <button
+                type="button"
+                className="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 flex  text-gray-500 dark:text-gray-400"
+                onClick={() => setShowPassword((state) => !state)}
+              >
+                <EyeIcon size={24} open={showPassword} />
+              </button>
             </div>
 
             {formState.errors.password && (
@@ -125,7 +126,7 @@ export function Login() {
           </div>
           <Button
             type="submit"
-            className="w-full h-12"
+            className="w-full h-12 disabled:cursor-not-allowed"
             isLoading={isLoading}
             disabled={isLoading}
           >
