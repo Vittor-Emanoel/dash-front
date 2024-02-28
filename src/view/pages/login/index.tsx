@@ -13,6 +13,8 @@ import { Button } from '../../components/ui/button';
 
 import logo from '../../../assets/images/logo.png';
 
+import { EyeIcon } from '@components/icons/EyeIcon';
+import { useState } from 'react';
 import { Input } from '../../components/ui/input';
 import { Label } from '../../components/ui/label';
 
@@ -37,6 +39,7 @@ export function Login() {
   } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
+  const [showPassword, setShowPassword] = useState(false);
   const { signin: signIn } = useAuth();
 
   const { mutateAsync, isLoading } = useMutation({
@@ -55,6 +58,11 @@ export function Login() {
     }
   });
 
+  function handleShowPassword() {
+    setShowPassword((state) => !state);
+  }
+
+  console.log(showPassword);
   return (
     <div className="w-full h-screen flex ">
       <div className="w-full max-w-[380px] m-auto hover:bg-background space-y-6 p-4">
@@ -90,7 +98,23 @@ export function Login() {
           </div>
           <div className="grid gap-2">
             <Label htmlFor="password">Senha</Label>
-            <Input {...register('password')} id="password" type="password" />
+            <div className="grid w-full max-w-sm items-center gap-1.5">
+              <div className="relative ">
+                <Input
+                  id="password"
+                  type={showPassword ? 'text' : 'password'}
+                  {...register('password')}
+                />
+                <button
+                  type="button"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6   text-gray-500 dark:text-gray-400"
+                  onClick={() => setShowPassword((state) => !state)}
+                >
+                  <EyeIcon size={24} open={showPassword} />
+                </button>
+              </div>
+            </div>
+
             {formState.errors.password && (
               <span className="text-xs text-red-500">
                 {formState.errors.password.message}
