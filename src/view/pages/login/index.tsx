@@ -58,11 +58,6 @@ export function Login() {
     }
   });
 
-  function handleShowPassword() {
-    setShowPassword((state) => !state);
-  }
-
-  console.log(showPassword);
   return (
     <div className="w-full h-screen flex ">
       <div className="w-full max-w-[380px] m-auto hover:bg-background space-y-6 p-4">
