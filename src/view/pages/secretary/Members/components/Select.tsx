@@ -1,4 +1,5 @@
 import { cn } from '@components/lib/lib';
+import { CrossCircledIcon } from '@radix-ui/react-icons';
 import { useState } from 'react';
 import {
   Select,
@@ -29,6 +30,7 @@ export function SelectDropdown({
   options,
   onChange,
   label,
+  error,
 }: SelectDropdownProps) {
   const [selectedValue, setSelectedValue] = useState(value ?? placeholder);
 
@@ -37,27 +39,42 @@ export function SelectDropdown({
     onChange?.(value);
   }
   return (
-    <Select defaultValue={value} onValueChange={handleSelect}>
-      <SelectTrigger className="h-[54px]">
-        <SelectValue placeholder={placeholder} />
-      </SelectTrigger>
-      <SelectContent className="z-[100]">
-        <SelectGroup>
-          <SelectLabel>{label}</SelectLabel>
-          {options.map((option) => (
-            <SelectItem
-              className={cn(
-                selectedValue &&
-                  'text-sm transition-all translate-y-0 text-zinc-500',
-              )}
-              value={option.id}
-              key={option.id}
-            >
-              {option.name}
-            </SelectItem>
-          ))}
-        </SelectGroup>
-      </SelectContent>
-    </Select>
+    <div className="flex flex-col ">
+      <Select defaultValue={value} onValueChange={handleSelect}>
+        <SelectTrigger
+          className={cn(
+            'h-[54px]',
+            !value && ' text-muted-foreground',
+            error && 'border-red-500 placeholder:red-500',
+          )}
+        >
+          <SelectValue placeholder={placeholder} />
+        </SelectTrigger>
+        <SelectContent className="z-[100]">
+          <SelectGroup>
+            <SelectLabel>{label}</SelectLabel>
+            {options.map((option) => (
+              <SelectItem
+                className={cn(
+                  selectedValue &&
+                    'text-sm transition-all translate-y-0 text-zinc-500',
+                )}
+                value={option.id}
+                key={option.id}
+              >
+                {option.name}
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+
+      {error && (
+        <div className="flex gap-2 mt-2 text-red-500">
+          <CrossCircledIcon />
+          <span className="text-xs">{error}</span>
+        </div>
+      )}
+    </div>
   );
 }

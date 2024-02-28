@@ -15,8 +15,8 @@ const schema = z.object({
   street: z.string().min(1, 'O endereço é obrigatório!'),
   houseNumber: z.string().min(1, 'O número é obrigatório!'),
   postalCode: z.string().min(1, 'O cep é obrigatório!'),
-  churchId: z.string(),
-  officeId: z.string(),
+  churchId: z.string({ required_error: 'Selecione uma igreja!' }),
+  officeId: z.string({ required_error: 'Selecione um cargo!' }),
 });
 
 type FormData = z.infer<typeof schema>;

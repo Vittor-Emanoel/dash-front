@@ -123,7 +123,7 @@ export function EditMember() {
                 />
               </div>
 
-              <div className="flex gap-4 justify-between">
+              <div className="grid grid-cols-2 gap-4">
                 <Controller
                   control={control}
                   name="churchId"
@@ -141,6 +141,7 @@ export function EditMember() {
                     );
                   }}
                 />
+
                 <Controller
                   control={control}
                   name="officeId"
