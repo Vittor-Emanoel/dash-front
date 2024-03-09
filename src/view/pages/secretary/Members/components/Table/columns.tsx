@@ -46,4 +46,14 @@ export const columns: ColumnDef<Member>[] = [
       return <p className="font-medium capitalize">{church.name}</p>;
     },
   },
+
+  // {
+  //   accessorKey: 'view',
+  //   header: 'Ver membro',
+  //   cell: ({ row }) => {
+  //     const church: IChurch = row.getValue('church');
+
+  //     return <p className="font-medium capitalize">{church.name}</p>;
+  //   },
+  // },
 ];

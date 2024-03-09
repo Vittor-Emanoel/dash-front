@@ -18,13 +18,14 @@ export function HeaderPages({
     <div className="py-8">
       <div className=" flex flex-col">
         <div className="flex gap-2 items-center">
-          <a
-            onClick={leftAction}
-            className="hover:bg-muted transition-colors p-2 rounded cursor-pointer"
-          >
-            <ArrowLeft />
-          </a>
-
+          {leftAction && (
+            <a
+              onClick={leftAction}
+              className="hover:bg-muted transition-colors p-2 rounded cursor-pointer"
+            >
+              <ArrowLeft />
+            </a>
+          )}
           <h2 className="text-3xl font-bold  max-md:text-xl max-md:font-bold">
             {title}
           </h2>

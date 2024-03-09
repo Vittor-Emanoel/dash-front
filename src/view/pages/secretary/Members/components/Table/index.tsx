@@ -24,7 +24,7 @@ import { Member } from '../../../../../../app/entities/Member';
 import { Button } from '../../../../../components/ui/button';
 import { Input } from '../../../../../components/ui/input';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { columns } from './columns';
 
 interface ITableMembersProps {
@@ -36,6 +36,7 @@ export function TableMembers({ data }: ITableMembersProps) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
+  const [params, setParams] = useSearchParams();
   const navigate = useNavigate();
 
   const table = useReactTable({

@@ -4,9 +4,13 @@ import { Controller } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useMediaQuery } from 'usehooks-ts';
 import { HeaderPages } from '../../../../../components/HeaderPages';
-import { CustomInput } from '../../../../../components/Input';
+import { InputMask } from '../../../../../components/InputMask';
 import { Button } from '../../../../../components/ui/button';
-import { Input } from '../../../../../components/ui/input';
+import {
+  Input,
+  InputError,
+  InputRoot,
+} from '../../../../../components/ui/input';
 import { SelectDropdown } from '../../components/Select';
 import { useNewMemberController } from './useNewMemberControlle';
 
@@ -32,13 +36,17 @@ export function NewMember() {
         />
 
         <div className="space-y-4 ">
-          <Input
-            type="text"
-            placeholder="Nome completo"
-            error={errors.fullName?.message}
-            {...register('fullName')}
-          />
-          <CustomInput
+          <InputRoot>
+            <Input
+              type="text"
+              placeholder="Nome completo"
+              error={errors.fullName?.message}
+              {...register('fullName')}
+            />
+            <InputError errorMessage={errors.fullName?.message} />
+          </InputRoot>
+
+          <InputMask
             type="text"
             placeholder="Telefone"
             mask="+55 (99) 99999-9999"
@@ -46,22 +54,28 @@ export function NewMember() {
             {...register('phone')}
           />
 
-          <Input
-            type="text"
-            placeholder="Endereço"
-            error={errors.street?.message}
-            {...register('street')}
-          />
-
-          <div className="grid grid-cols-2 gap-4">
+          <InputRoot>
             <Input
               type="text"
-              placeholder="Número"
-              error={errors.houseNumber?.message}
-              {...register('houseNumber')}
+              placeholder="Endereço"
+              error={errors.street?.message}
+              {...register('street')}
             />
+            <InputError errorMessage={errors.street?.message} />
+          </InputRoot>
 
-            <CustomInput
+          <div className="grid grid-cols-2 gap-4">
+            <InputRoot>
+              <Input
+                type="text"
+                placeholder="Número"
+                error={errors.houseNumber?.message}
+                {...register('houseNumber')}
+              />
+              <InputError errorMessage={errors.houseNumber?.message} />
+            </InputRoot>
+
+            <InputMask
               type="text"
               mask="99999-999"
               placeholder="Cep"

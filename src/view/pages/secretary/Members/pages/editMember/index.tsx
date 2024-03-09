@@ -5,7 +5,7 @@ import { Controller } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useMediaQuery } from 'usehooks-ts';
 import { HeaderPages } from '../../../../../components/HeaderPages';
-import { CustomInput } from '../../../../../components/Input';
+import { InputMask } from '../../../../../components/InputMask';
 import { Button } from '../../../../../components/ui/button';
 import { Input } from '../../../../../components/ui/input';
 import { DeleteMemberAlertModal } from '../../components/DeleteMemberAlert';
@@ -78,7 +78,7 @@ export function EditMember() {
                 name="phone"
                 render={({ field: { value } }) => {
                   return (
-                    <CustomInput
+                    <InputMask
                       type="text"
                       value={value}
                       placeholder="Telefone"
@@ -110,7 +110,7 @@ export function EditMember() {
                   name="postalCode"
                   render={({ field: { value } }) => {
                     return (
-                      <CustomInput
+                      <InputMask
                         type="text"
                         value={value}
                         mask="99999-999"

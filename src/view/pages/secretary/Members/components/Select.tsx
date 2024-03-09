@@ -39,7 +39,7 @@ export function SelectDropdown({
     onChange?.(value);
   }
   return (
-    <div className="flex flex-col ">
+    <div className="flex flex-col">
       <Select defaultValue={value} onValueChange={handleSelect}>
         <SelectTrigger
           className={cn(

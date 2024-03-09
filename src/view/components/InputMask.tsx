@@ -1,7 +1,6 @@
-import { ForwardedRef, InputHTMLAttributes, forwardRef } from 'react';
-
 import { CrossCircledIcon } from '@radix-ui/react-icons';
-import InputMask from 'react-input-mask';
+import { ForwardedRef, InputHTMLAttributes, forwardRef } from 'react';
+import Inpt from 'react-input-mask';
 import { cn } from './lib/lib';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -10,7 +9,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   placeholder: string;
 }
 
-const CustomInput = forwardRef(
+const InputMask = forwardRef(
   (
     {
       className,
@@ -26,13 +25,13 @@ const CustomInput = forwardRef(
   ) => {
     return (
       <div className="">
-        <InputMask
+        <Inpt
           mask={mask}
           placeholder={placeholder}
           defaultValue={value}
           type={type}
           className={cn(
-            'flex border w-full  rounded-md h-[52px] text-sm border-input bg-background px-3 py-2  ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+            'flex border w-full rounded-md h-[52px] text-sm border-input bg-background px-3 py-2  ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
             className,
             error && 'border-red-500 placeholder:red-500',
           )}
@@ -51,6 +50,6 @@ const CustomInput = forwardRef(
   },
 );
 
-CustomInput.displayName = 'Input';
+InputMask.displayName = 'Input';
 
-export { CustomInput };
+export { InputMask };
