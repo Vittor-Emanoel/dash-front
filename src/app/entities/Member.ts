@@ -6,5 +6,13 @@ export interface Member {
   houseNumber: string;
   postalCode: string;
   churchId: string;
+  church: {
+    id: string;
+    name: string;
+  };
+  office: {
+    id: string;
+    name: string;
+  };
   officeId: string;
 }
