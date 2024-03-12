@@ -5,7 +5,13 @@ import { useNavigate } from 'react-router-dom';
 //components
 
 import { useMembers } from '@app/hooks/useMembers';
-import { HeaderPages } from '@components/HeaderPages';
+
+import {
+  HeaderPageRoot,
+  HeaderPageSubtitle,
+  HeaderPageTitle,
+} from '@components/HeaderPages';
+import BreadCrumb from '@components/breadcrumb';
 import { cn } from '@components/lib/lib';
 import { Button } from '@components/ui/button';
 import { PlusCircle } from 'lucide-react';
@@ -22,18 +28,28 @@ export function Members() {
     <div className="w-full">
       <div
         className={cn(
-          'flex justify-between items-center',
+          'flex  justify-between items-center',
           isMobile && 'flex-col pb-4 items-start',
         )}
       >
-        <HeaderPages
-          title="Membros"
-          subtitle="Gerencie os membros de sua congregação."
-          leftAction={() => navigate('/secretary')}
-        />
+        <HeaderPageRoot className="py-6">
+          <BreadCrumb
+            items={[
+              {
+                title: 'Membros',
+                link: '/members',
+              },
+            ]}
+          />
+          <HeaderPageTitle>Membros</HeaderPageTitle>
+          <HeaderPageSubtitle>
+            Gerencie os membros de sua congregação.
+          </HeaderPageSubtitle>
+        </HeaderPageRoot>
+
         <Button
           className={cn(' flex items-center gap-4 h-12 ', isMobile && 'w-full')}
-          onClick={() => navigate('/members/new')}
+          onClick={() => navigate('/new-member')}
         >
           <PlusCircle size={18} />
           Criar novo

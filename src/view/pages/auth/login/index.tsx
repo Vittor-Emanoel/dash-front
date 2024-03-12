@@ -6,17 +6,17 @@ import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../../../app/hooks/useAuth';
-import { authService } from '../../../app/services/authService';
-import { SigninParams } from '../../../app/services/authService/signin';
-import { Button } from '../../components/ui/button';
 
-import logo from '../../../assets/images/logo.png';
+import logo from '../../../../assets/images/logo.png';
 
+import { useAuth } from '@app/hooks/useAuth';
+import { authService } from '@app/services/authService';
+import { SigninParams } from '@app/services/authService/signin';
 import { EyeIcon } from '@components/icons/EyeIcon';
+import { Button } from '@components/ui/button';
+import { Input } from '@components/ui/input';
+import { Label } from '@radix-ui/react-dropdown-menu';
 import { useState } from 'react';
-import { Input } from '../../components/ui/input';
-import { Label } from '../../components/ui/label';
 
 const schema = z.object({
   email: z
@@ -78,7 +78,7 @@ export function Login() {
           autoComplete="off"
         >
           <div className="grid gap-2">
-            <Label htmlFor="email">Email</Label>
+            <Label>Email</Label>
             <Input
               {...register('email')}
               id="email"
@@ -93,7 +93,7 @@ export function Login() {
           </div>
 
           <div className="grid gap-2">
-            <Label htmlFor="password">Senha</Label>
+            <Label>Senha</Label>
 
             <div className="grid w-full max-w-sm items-center gap-1.5 relative">
               <Input

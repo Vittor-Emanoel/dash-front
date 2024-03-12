@@ -1,6 +1,11 @@
+import {
+  HeaderPageRoot,
+  HeaderPageSubtitle,
+  HeaderPageTitle,
+} from '@components/HeaderPages';
+import BreadCrumb from '@components/breadcrumb';
 import { Users2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { HeaderPages } from '../../../components/HeaderPages';
 import {
   Card,
   CardContent,
@@ -14,11 +19,20 @@ export function Secretary() {
   return (
     <>
       <div className="flex-1 ">
-        <HeaderPages
-          title="Secretaria"
-          subtitle="Aqui estão as principais informações sobre a secretaria da Igreja."
-          leftAction={() => navigate('/dashboard')}
-        />
+        <HeaderPageRoot className="py-6">
+          <BreadCrumb
+            items={[
+              {
+                title: 'Secretaria',
+                link: '/secretary',
+              },
+            ]}
+          />
+          <HeaderPageTitle>Secretaria</HeaderPageTitle>
+          <HeaderPageSubtitle>
+            Aqui estão as principais informações sobre a secretaria da Igreja.
+          </HeaderPageSubtitle>
+        </HeaderPageRoot>
       </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card onClick={() => navigate('/members')}>

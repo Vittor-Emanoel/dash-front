@@ -1,11 +1,11 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { DashboardLayout } from '../view/layouts/DashboardLayout';
+import { DashboardLayout } from '../view/_layouts/DashboardLayout';
 import { Dashboard } from '../view/pages/dashboard';
-import { Login } from '../view/pages/login';
-
-import { ForgotPassword } from '../view/pages/forgot-password';
 
 import { Secretary } from '@pages/secretary/Home';
+
+import { ForgotPassword } from '../view/pages/auth/forgot-password';
+import { Login } from '../view/pages/auth/login';
 import { Members } from '../view/pages/secretary/Members';
 import { EditMember } from '../view/pages/secretary/Members/pages/editMember';
 import { NewMember } from '../view/pages/secretary/Members/pages/newMember';
@@ -29,8 +29,8 @@ export function Router() {
             <Route element={<RoleGuard isPrivate={true} />}>
               <Route path="/secretary" element={<Secretary />} />
               <Route path="/members" element={<Members />} />
-              <Route path="/members/new" element={<NewMember />} />
-              <Route path="/members/edit/:id" element={<EditMember />} />
+              <Route path="/new-member" element={<NewMember />} />
+              <Route path="/edit-member/:id" element={<EditMember />} />
             </Route>
           </Route>
         </Route>

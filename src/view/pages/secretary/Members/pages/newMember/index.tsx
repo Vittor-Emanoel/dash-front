@@ -1,9 +1,8 @@
 import { useChurchs } from '@app/hooks/useChurchs';
 import { useOffices } from '@app/hooks/useOffices';
 import { Controller } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 import { useMediaQuery } from 'usehooks-ts';
-import { HeaderPages } from '../../../../../components/HeaderPages';
+// import { HeaderPages } from '../../../../../components/HeaderPages';
 import { InputMask } from '../../../../../components/InputMask';
 import { Button } from '../../../../../components/ui/button';
 import {
@@ -21,19 +20,17 @@ export function NewMember() {
   const { church, isLoading: loadingChurchs } = useChurchs();
   const { office, isLoading: loadingOffices } = useOffices();
 
-  const navigate = useNavigate();
-
   return (
     <div className="w-full flex justify-between ">
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-[550px] md:pr-14 items-center justify-center "
       >
-        <HeaderPages
+        {/* <HeaderPages
           title="Criar membro"
           subtitle="insira as informações abaixo e crie um novo membro."
           leftAction={() => navigate('/members')}
-        />
+        /> */}
 
         <div className="space-y-4 ">
           <InputRoot>

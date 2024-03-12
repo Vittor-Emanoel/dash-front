@@ -2,9 +2,13 @@ import { useAuth } from '@app/hooks/useAuth';
 import { useMembers } from '@app/hooks/useMembers';
 import { getFirstNameAndLastName } from '@app/utils/getFirstNameAndLastName';
 import { getPeriodOfDay } from '@app/utils/getPeriodOfDay';
+import {
+  HeaderPageRoot,
+  HeaderPageSubtitle,
+  HeaderPageTitle,
+} from '@components/HeaderPages';
 import { cn } from '@components/lib/lib';
 import { CalendarDays, Church, Layers3, Users2 } from 'lucide-react';
-import { HeaderPages } from '../../components/HeaderPages';
 import {
   Card,
   CardContent,
@@ -21,10 +25,13 @@ export function Dashboard() {
 
   return (
     <>
-      <HeaderPages
-        title={`Olá, ${getFirstNameAndLastName(user?.name!)}`}
-        subtitle={`Seja bem vindo, ${periodOfDay}!`}
-      />
+      <HeaderPageRoot className="py-8">
+        <HeaderPageTitle>
+          {`Olá, ${getFirstNameAndLastName(user?.name!)}`}
+        </HeaderPageTitle>
+        <HeaderPageSubtitle>{`Seja bem vindo, ${periodOfDay}!`}</HeaderPageSubtitle>
+      </HeaderPageRoot>
+
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 py-4">
         <Card>
           <CardHeader className="flex flex-row  items-center justify-between">

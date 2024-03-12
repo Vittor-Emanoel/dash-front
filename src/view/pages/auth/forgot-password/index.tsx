@@ -3,9 +3,7 @@ import { z } from 'zod';
 
 import { useForm } from 'react-hook-form';
 
-import { ArrowLeft } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
-import { Button } from '../../components/ui/button';
+import { Button } from '@components/ui/button';
 import {
   Card,
   CardContent,
@@ -13,9 +11,11 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '../../components/ui/card';
-import { Input } from '../../components/ui/input';
-import { Label } from '../../components/ui/label';
+} from '@components/ui/card';
+import { Input } from '@components/ui/input';
+import { Label } from '@radix-ui/react-dropdown-menu';
+import { ArrowLeft } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const schema = z.object({
   email: z
@@ -62,7 +62,7 @@ export function ForgotPassword() {
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
+              <Label>Email</Label>
               <Input
                 {...register('email')}
                 id="email"

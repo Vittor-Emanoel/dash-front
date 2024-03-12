@@ -1,10 +1,9 @@
 import { useChurchs } from '@app/hooks/useChurchs';
 import { useOffices } from '@app/hooks/useOffices';
-import { Trash } from 'lucide-react';
 import { Controller } from 'react-hook-form';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useMediaQuery } from 'usehooks-ts';
-import { HeaderPages } from '../../../../../components/HeaderPages';
+
 import { InputMask } from '../../../../../components/InputMask';
 import { Button } from '../../../../../components/ui/button';
 import { Input } from '../../../../../components/ui/input';
@@ -28,11 +27,8 @@ export function EditMember() {
     isLoadingDelete,
     handleDeleteMember,
     handleSubmit,
-    handleOpenDeleteModal,
     handleCloseDeleteModal,
   } = useEditMemberController({ memberId: id! });
-
-  const navigate = useNavigate();
 
   const { church, isLoading: loadingChurchs } = useChurchs();
   const { office, isLoading: loadingOffices } = useOffices();
@@ -51,7 +47,7 @@ export function EditMember() {
         onSubmit={handleSubmit}
         className="w-full max-w-[550px] md:pr-14 items-center justify-center  "
       >
-        <HeaderPages
+        {/* <HeaderPages
           title="Editar Membro"
           subtitle="insira as informações abaixo e edite as informações do membro."
           leftAction={() => navigate('/members')}
@@ -61,7 +57,7 @@ export function EditMember() {
             size={38}
             onClick={handleOpenDeleteModal}
           />
-        </HeaderPages>
+        </HeaderPages> */}
 
         <div className="space-y-4 ">
           {!isLoadingMember && (

@@ -1,10 +1,9 @@
 import { Outlet } from 'react-router-dom';
 import { useMediaQuery } from 'usehooks-ts';
 
-
-import { UserNav } from '@components/ui/user-nav';
-import { HeaderMobile } from '@components/ui/header-mobile';
 import { Header } from '@components/ui/header';
+import { HeaderMobile } from '@components/ui/header-mobile';
+import { UserNav } from '@components/ui/user-nav';
 
 export function DashboardLayout() {
   // const { theme, setTheme } = useTheme();
