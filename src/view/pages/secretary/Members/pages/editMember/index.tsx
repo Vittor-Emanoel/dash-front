@@ -4,6 +4,13 @@ import { Controller } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { useMediaQuery } from 'usehooks-ts';
 
+import {
+  HeaderPageRoot,
+  HeaderPageSubtitle,
+  HeaderPageTitle,
+} from '@components/HeaderPages';
+import BreadCrumb from '@components/breadcrumb';
+import { Trash } from 'lucide-react';
 import { InputMask } from '../../../../../components/InputMask';
 import { Button } from '../../../../../components/ui/button';
 import { Input } from '../../../../../components/ui/input';
@@ -27,6 +34,7 @@ export function EditMember() {
     isLoadingDelete,
     handleDeleteMember,
     handleSubmit,
+    handleOpenDeleteModal,
     handleCloseDeleteModal,
   } = useEditMemberController({ memberId: id! });
 
@@ -47,17 +55,34 @@ export function EditMember() {
         onSubmit={handleSubmit}
         className="w-full max-w-[550px] md:pr-14 items-center justify-center  "
       >
-        {/* <HeaderPages
-          title="Editar Membro"
-          subtitle="insira as informações abaixo e edite as informações do membro."
-          leftAction={() => navigate('/members')}
-        >
-          <Trash
-            className="cursor-pointer rounded p-2 bg-muted hover:bg-muted-foreground hover:text-destructive transition-colors "
-            size={38}
-            onClick={handleOpenDeleteModal}
+        <HeaderPageRoot className="py-6">
+          <BreadCrumb
+            items={[
+              {
+                title: 'Secretaria',
+                link: '/secretary',
+              },
+              {
+                title: 'Editar membro',
+                link: '/edit-member',
+              },
+            ]}
           />
-        </HeaderPages> */}
+          <HeaderPageTitle className="flex justify-between ">
+            Editar Membro
+            <Button
+              type="button"
+              className="cursor-pointer rounded p-2  hover:bg-muted-foreground/10 hover:text-red-700 transition-colors"
+              variant="link"
+              onClick={handleOpenDeleteModal}
+            >
+              <Trash size={24} />
+            </Button>
+          </HeaderPageTitle>
+          <HeaderPageSubtitle className="mt-2">
+            Insira as informações abaixo e edite as informações do membro.
+          </HeaderPageSubtitle>
+        </HeaderPageRoot>
 
         <div className="space-y-4 ">
           {!isLoadingMember && (
@@ -162,6 +187,7 @@ export function EditMember() {
         </div>
 
         <Button
+          type="submit"
           className="w-full h-12 mt-4"
           isLoading={isLoading}
           disabled={isLoading}

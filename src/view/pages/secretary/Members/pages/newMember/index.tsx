@@ -1,8 +1,13 @@
 import { useChurchs } from '@app/hooks/useChurchs';
 import { useOffices } from '@app/hooks/useOffices';
+import {
+  HeaderPageRoot,
+  HeaderPageSubtitle,
+  HeaderPageTitle,
+} from '@components/HeaderPages';
+import BreadCrumb from '@components/breadcrumb';
 import { Controller } from 'react-hook-form';
 import { useMediaQuery } from 'usehooks-ts';
-// import { HeaderPages } from '../../../../../components/HeaderPages';
 import { InputMask } from '../../../../../components/InputMask';
 import { Button } from '../../../../../components/ui/button';
 import {
@@ -26,11 +31,24 @@ export function NewMember() {
         onSubmit={handleSubmit}
         className="w-full max-w-[550px] md:pr-14 items-center justify-center "
       >
-        {/* <HeaderPages
-          title="Criar membro"
-          subtitle="insira as informações abaixo e crie um novo membro."
-          leftAction={() => navigate('/members')}
-        /> */}
+        <HeaderPageRoot className="py-6">
+          <BreadCrumb
+            items={[
+              {
+                title: 'Secretaria',
+                link: '/secretary',
+              },
+              {
+                title: 'Novo membro',
+                link: '/new-member',
+              },
+            ]}
+          />
+          <HeaderPageTitle>Criar membro</HeaderPageTitle>
+          <HeaderPageSubtitle>
+            Insira as informações abaixo e crie um novo membro.
+          </HeaderPageSubtitle>
+        </HeaderPageRoot>
 
         <div className="space-y-4 ">
           <InputRoot>
