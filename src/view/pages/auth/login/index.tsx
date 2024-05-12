@@ -15,7 +15,7 @@ import { SigninParams } from '@app/services/authService/signin';
 import { EyeIcon } from '@components/icons/EyeIcon';
 import { Button } from '@components/ui/button';
 import { Input } from '@components/ui/input';
-import { Label } from '@radix-ui/react-dropdown-menu';
+import { Label } from '@components/ui/label';
 import { useState } from 'react';
 
 const schema = z.object({
@@ -78,7 +78,9 @@ export function Login() {
           autoComplete="off"
         >
           <div className="grid gap-2">
-            <Label>Email</Label>
+            <Label
+            className='text-sm'
+            >Email</Label>
             <Input
               {...register('email')}
               id="email"
@@ -126,7 +128,7 @@ export function Login() {
           </div>
           <Button
             type="submit"
-            className="w-full h-12 disabled:cursor-not-allowed"
+            className="w-full h-[42px] disabled:cursor-not-allowed"
             isLoading={isLoading}
             disabled={isLoading}
           >

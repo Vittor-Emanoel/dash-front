@@ -18,6 +18,7 @@ export function DashboardLayout() {
         {isDesktop && <Header />}
 
         <div className="ml-auto flex items-center space-x-4">
+          {/* <ModeToggle /> */}
           <UserNav />
         </div>
       </div>

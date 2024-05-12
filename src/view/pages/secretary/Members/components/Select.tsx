@@ -43,7 +43,7 @@ export function SelectDropdown({
       <Select defaultValue={value} onValueChange={handleSelect}>
         <SelectTrigger
           className={cn(
-            'h-[54px]',
+            'h-[42px]',
             !value && ' text-muted-foreground',
             error && 'border-red-500 placeholder:red-500',
           )}

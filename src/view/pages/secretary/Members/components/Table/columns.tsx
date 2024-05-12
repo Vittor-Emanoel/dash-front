@@ -1,6 +1,6 @@
 import { IChurch } from '@app/entities/Church';
 import { ColumnDef } from '@tanstack/react-table';
-import { ArrowUpDown } from 'lucide-react';
+import { ArrowUpDown, Edit } from 'lucide-react';
 import { Member } from '../../../../../../app/entities/Member';
 import { IOffice } from '../../../../../../app/entities/Office';
 import { Button } from '../../../../../components/ui/button';
@@ -46,14 +46,17 @@ export const columns: ColumnDef<Member>[] = [
       return <p className="font-medium capitalize">{church.name}</p>;
     },
   },
-
-  // {
-  //   accessorKey: 'view',
-  //   header: 'Ver membro',
-  //   cell: ({ row }) => {
-  //     const church: IChurch = row.getValue('church');
-
-  //     return <p className="font-medium capitalize">{church.name}</p>;
-  //   },
-  // },
+  {
+    accessorKey: 'edit-member',
+    header: 'Editar',
+    cell: ({ row }) => {
+      return  (
+        <button className="hover:bg-primary/10 rounded-lg p-2 cursor-pointer">
+        <Edit
+          size={18}
+        />
+      </button>
+      )
+    },
+  },
 ];

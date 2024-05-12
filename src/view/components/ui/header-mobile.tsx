@@ -1,7 +1,7 @@
 import { LogOut, MenuIcon } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { NAV_ITENS } from '../../utils/NavLinks';
+import { NAV_ITENS } from "../../utils/NAV_ITENS";
 import { Button } from './button';
 import {
   Sheet,

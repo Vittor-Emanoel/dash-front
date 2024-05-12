@@ -185,8 +185,8 @@ export function TableMembers({ data }: ITableMembersProps) {
                   <TableRow
                     key={row.id}
                     data-state={row.getIsSelected() && 'selected'}
-                    className="cursor-pointer"
                     onClick={() => handleViewMember(row.original)}
+
                   >
                     {row.getVisibleCells().map((cell) => (
                       <TableCell key={cell.id}>
@@ -194,6 +194,7 @@ export function TableMembers({ data }: ITableMembersProps) {
                           cell.column.columnDef.cell,
                           cell.getContext(),
                         )}
+
                       </TableCell>
                     ))}
                   </TableRow>
