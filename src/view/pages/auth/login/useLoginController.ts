@@ -1,14 +1,14 @@
 import { useAuth } from '@app/hooks/useAuth';
 import { authService } from '@app/services/authService';
-import { SignupParams } from '@app/services/authService/signup';
+import { SigninParams } from '@app/services/authService/signin';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 import { z } from 'zod';
 
 const schema = z.object({
-  name: z.string().min(4, 'O nome deve conter pelo menos 4 dígitos'),
   email: z
     .string()
     .nonempty('E-mail é obrigatório')
@@ -21,7 +21,7 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-export function useRegisterController() {
+export function useLoginController() {
   const {
     formState: { errors },
     register,
@@ -30,22 +30,31 @@ export function useRegisterController() {
     resolver: zodResolver(schema),
   });
 
-  const { signin } = useAuth();
+  const [showPassword, setShowPassword] = useState(false);
+  const { signin: signIn } = useAuth();
 
   const { mutateAsync, isLoading } = useMutation({
-    mutationFn: async (data: SignupParams) => {
-      return authService.signup(data);
+    mutationFn: async (data: SigninParams) => {
+      return authService.signin(data);
     },
   });
 
   const handleSubmit = hookFormSubmit(async (data) => {
     try {
       const { accessToken } = await mutateAsync(data);
-      signin(accessToken);
-    } catch (error) {
-      toast.error('Conta já cadastrada!');
+
+      signIn(accessToken);
+    } catch {
+      toast.error('Credenciais inválidas!');
     }
   });
 
-  return { register, errors, handleSubmit, isLoading };
+  return {
+    handleSubmit,
+    isLoading,
+    setShowPassword,
+    showPassword,
+    errors,
+    register,
+  };
 }

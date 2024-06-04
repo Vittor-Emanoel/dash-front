@@ -11,6 +11,8 @@ import { cn } from '@components/lib/lib';
 import { CrossCircledIcon } from '@radix-ui/react-icons';
 import { Logo } from '../../../../assets/images/logo';
 
+import bg from '../../../../assets/bg.jpg';
+
 export function Register() {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -23,15 +25,15 @@ export function Register() {
           <header className="items-center">
             <Logo />
             <h1 className="text-2xl font-semibold leading-none tracking-tight mt-4">
-              Criar conta
+              Criar conta grátis
             </h1>
             <p className="text-sm text-muted-foreground mt-2">
               Crie sua conta e comece a usar os recursos.
             </p>
           </header>
-          <form onSubmit={handleSubmit} className="grid gap-2">
-            <div className="grid gap-2">
-              <Label className="text-sm text-zinc-700">Nome</Label>
+          <form onSubmit={handleSubmit} className="grid gap-3">
+            <div className="grid gap-1">
+              <Label className="text-sm light:text-zinc-700">Nome</Label>
               <Input
                 id="name"
                 type="text"
@@ -49,8 +51,8 @@ export function Register() {
                 </span>
               )}
             </div>
-            <div className="grid gap-2">
-              <Label className="text-sm text-zinc-700">E-mail</Label>
+            <div className="grid gap-1">
+              <Label className="text-sm light:text-zinc-700">E-mail</Label>
               <Input
                 id="email"
                 type="email"
@@ -68,9 +70,9 @@ export function Register() {
                 </span>
               )}
             </div>
-            <div className="grid gap-2">
+            <div className="grid gap-1">
               <div className="flex items-center">
-                <Label className="text-sm text-zinc-700">Senha</Label>
+                <Label className="text-sm light:text-zinc-700">Senha</Label>
               </div>
 
               <div className="grid w-full max-w-sm items-center gap-1.5 relative">
@@ -86,10 +88,10 @@ export function Register() {
                 />
                 <button
                   type="button"
-                  className="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 flex  text-gray-500 dark:text-gray-400"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 flex items-center justify-center text-gray-500 dark:text-gray-400"
                   onClick={() => setShowPassword((state) => !state)}
                 >
-                  <EyeIcon size={24} open={showPassword} />
+                  <EyeIcon size={18} open={showPassword} />
                 </button>
               </div>
               {errors.password && (
@@ -108,7 +110,7 @@ export function Register() {
               Entrar com o e-mail
             </Button>
 
-            <div className="text-center text-zinc-700">
+            <div className="text-center text-zinc-700 text-sm">
               <p>ou</p>
             </div>
             <Button variant="outline" className="w-full flex gap-2">
@@ -117,17 +119,19 @@ export function Register() {
             </Button>
           </form>
           <div className="flex gap-1 items-center justify-center text-sm text-muted-foreground">
-            <p>Não possui uma conta?</p>
+            <p>Já possui uma conta?</p>
             <Link
               to="/login"
               className="underline hover:text-primary transition-colors"
             >
-              Criar
+              Entrar
             </Link>
           </div>
         </div>
       </div>
-      <div className="hidden bg-muted lg:block"></div>
+      <div className="hidden bg-muted lg:block">
+        <img src={bg} alt="" className="h-full bg-cover" />
+      </div>
     </div>
   );
 }

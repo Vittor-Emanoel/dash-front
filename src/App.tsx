@@ -20,8 +20,8 @@ export function App() {
       <AuthProvider>
         <ThemeProvider>
           <Router />
-          <Toaster richColors position="top-center" />
         </ThemeProvider>
+        <Toaster richColors={true} position="top-center" />
       </AuthProvider>
       <ReactQueryDevtools position="bottom-right" />
     </QueryClientProvider>
