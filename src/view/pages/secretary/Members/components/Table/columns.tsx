@@ -49,14 +49,12 @@ export const columns: ColumnDef<Member>[] = [
   {
     accessorKey: 'edit-member',
     header: 'Editar',
-    cell: ({ row }) => {
-      return  (
+    cell: () => {
+      return (
         <button className="hover:bg-primary/10 rounded-lg p-2 cursor-pointer">
-        <Edit
-          size={18}
-        />
-      </button>
-      )
+          <Edit size={18} />
+        </button>
+      );
     },
   },
 ];
